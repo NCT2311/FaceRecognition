@@ -1,15 +1,16 @@
 import mongodb
-#import face_reg
+from face_reg import storeUserImage
 from datetime import datetime
 
 class UserWork:
     def addUser(self):
-        cur_id = self.users.count_documents({})
+        cur_id = mongodb.users.count_documents({})
         name = str(input("Type your name: "))
         priority = int(input("Select priority: "))
         newUser = {"_id": cur_id, "name": name, "priority": priority}
         mongodb.users.insert_one(newUser)
         self.addHistoryEvent("add new user", name)
+        storeUserImage(name)
 
     def removeUser(self, name):
         mongodb.users.delete_one({'name': name})
@@ -31,7 +32,5 @@ class UserWork:
         
 if __name__ == '__main__':
     collection = UserWork()
-    # collection.addUser()
-    # collection.addUser()
-    # collection.removeUser('vuduy')
-    collection.removeHistory()
+    collection.addUser()
+    
