@@ -1,11 +1,15 @@
 import mongodb
 from face_reg import storeUserImage
 from datetime import datetime
+import shutil
 
 class UserWork:
     def addUser(self):
         cur_id = mongodb.users.count_documents({})
         name = str(input("Type your name: "))
+        while not self.existsUser(name):
+            print("User already exists, try again!")
+            name = str(input("Type your name: "))
         priority = int(input("Select priority: "))
         newUser = {"_id": cur_id, "name": name, "priority": priority}
         mongodb.users.insert_one(newUser)
@@ -15,6 +19,7 @@ class UserWork:
     def removeUser(self, name):
         mongodb.users.delete_one({'name': name})
         self.addHistoryEvent("remove user", name)
+        shutil.rmtree('user_capture/' + str(name))
         print("done!")
 
     def addHistoryEvent(self, type, name):
@@ -29,8 +34,14 @@ class UserWork:
     
     def removeHistory(self):
         mongodb.history.delete_many({})
-        
+
+    def existsUser(self, name):
+        return mongodb.users.count_documents({"name": name}) == 0
+
+
 if __name__ == '__main__':
     collection = UserWork()
-    collection.addUser()    # add new user
+    #collection.addUser()    # add new user
+    #collection.removeUser('vuu')
+    #collection.removeUser('vunguyenduy')
     
