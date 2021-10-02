@@ -32,5 +32,5 @@ class UserWork:
         
 if __name__ == '__main__':
     collection = UserWork()
-    collection.addUser()
+    collection.addUser()    # add new user
     

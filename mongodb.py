@@ -1,30 +1,20 @@
+'''
+THIS MODULE IS USED TO CONNECT TO DB via MongoDB
+'''
 from pymongo import MongoClient
-from datetime import datetime
 
-
-
-# "mongodb+srv://<USER>:<PASSWORD>@<CLUSTER>/<user>?ssl=true&ssl_cert_reqs=CERT_NONE"
-# connect string form
-
+'''
+Using Mongodb to store Data:
+My DB named "DoorLock" has two Collections:
+    + Users: store userInfo(_id, name, priority).
+    + History: store userEvent(add new user, remove user).
+CONNECTING STRING FORM: "mongodb+srv://<USER>:<PASSWORD>@<CLUSTER>/<user>?ssl=true&ssl_cert_reqs=CERT_NONE"
+'''
+# connect to DB
 cluster = MongoClient("mongodb+srv://duyvu1109:duyvu1109@cluster0.jzoff.mongodb.net/myFirstDatabase?ssl=true&ssl_cert_reqs=CERT_NONE")
+# open DoorLock
 db = cluster["DoorLock"]
+# open User collection
 users = db["User"]
+# open History collection
 history = db ["History"]
-
-# post = {"id": 1, "name": "duyvu", "priority": 1}
-# post1 = {"id": 2, "name": "hda", "priority": 2}
-# users.insert_one(post)
-# users.insert_one(post1)
-
-# users.delete_many({})
-# history.delete_many({})
-# print("Ready!")
-
-# key = int(input())
-# if (key == 1):
-#     time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-#     print(time)
-#     post = {"_id": 1, "name": "nguyenduyvu", "priority": 1}
-#     h0 = {"_id": 1, "name": "nguyenduyvu", "time": time}
-#     users.insert_one(post)
-#     history.insert_one(h0)
