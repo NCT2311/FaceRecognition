@@ -11,13 +11,13 @@ My DB named "DoorLock" has two Collections:
 CONNECTING STRING FORM: "mongodb+srv://<USER>:<PASSWORD>@<CLUSTER>/<user>?ssl=true&ssl_cert_reqs=CERT_NONE"
 '''
 # connect to DB
-cluster = MongoClient("mongodb+srv://duyvu1109:duyvu1109@cluster0.jzoff.mongodb.net/myFirstDatabase?ssl=true&ssl_cert_reqs=CERT_NONE")
+cluster = MongoClient("mongodb+srv://duyvu1109:Duyvu1109@cluster0.jzoff.mongodb.net/DoorLock?ssl=true&ssl_cert_reqs=CERT_NONE")
 # open DoorLock
 db = cluster["DoorLock"]
 # open User collection
 users = db["User"]
 # open History collection
-history = db ["History"]
+history = db["History"]
 
 def queryFromDB():
     if not os.path.exists('users.json') and not os.path.exists('history.json'):
@@ -37,4 +37,3 @@ def queryFromDB():
     with open('history.json', 'w') as file:
         file.write(json_data)
     file.close()
-queryFromDB()
