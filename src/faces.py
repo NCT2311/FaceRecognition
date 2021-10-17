@@ -3,6 +3,9 @@ import cv2
 import pickle
 
 face_cascade = cv2.CascadeClassifier("./cascades/data/haarcascade_frontalface_alt2.xml")
+eye_cascade = cv2.CascadeClassifier("cascades/data/haarcascade_eye.xml")
+smile_cascade = cv2.CascadeClassifier("cascades/data/haarcascade_smile.xml")
+
 recognizer = cv2.face.LBPHFaceRecognizer_create()
 recognizer.read("trainner.yml")
 
@@ -13,6 +16,13 @@ with open("labels.pickle", "rb") as f:
 
 cap = cv2.VideoCapture(0)
 
+# Rescale frame
+def make_720p():
+    cap.set(3, 1280)
+    cap.set(4, 720)
+
+
+make_720p()
 while True:
     # Capture frame-by-frame
     ret, frame = cap.read()
@@ -42,6 +52,10 @@ while True:
         end_cord_x = x + w  # Width of Rectangle
         end_cord_y = y + h  # Height of Recctangle
         cv2.rectangle(frame, (x, y), (end_cord_x, end_cord_y), color, stroke)
+        # Recognize by smile_cascades
+        subitems = smile_cascade.detectMultiScale(roi_gray)
+        for (ex, ey, ew, eh) in subitems:
+            cv2.rectangle(roi_color, (ex, ey), (ex + ew, ey + eh), (0, 255, 0), 2)
     # Display the resulting frame
     cv2.imshow("frame", frame)
     if cv2.waitKey(20) & 0xFF == ord("q"):
