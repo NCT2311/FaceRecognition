@@ -45,17 +45,17 @@ while True:
             cv2.putText(frame, name, (x, y), font, 1, color, stroke, cv2.LINE_AA)
 
         img_item = "my-image.png"
-        cv2.imwrite(img_item, roi_gray)
+        cv2.imwrite(img_item, roi_color)
         # Draw a Rectangle
         color = (255, 0, 0)  # BGR 0 - 255
         stroke = 2
         end_cord_x = x + w  # Width of Rectangle
         end_cord_y = y + h  # Height of Recctangle
         cv2.rectangle(frame, (x, y), (end_cord_x, end_cord_y), color, stroke)
-        # Recognize by smile_cascades
-        subitems = smile_cascade.detectMultiScale(roi_gray)
-        for (ex, ey, ew, eh) in subitems:
-            cv2.rectangle(roi_color, (ex, ey), (ex + ew, ey + eh), (0, 255, 0), 2)
+        # # Recognize by smile_cascades
+        # subitems = smile_cascade.detectMultiScale(roi_gray)
+        # for (ex, ey, ew, eh) in subitems:
+        #     cv2.rectangle(roi_color, (ex, ey), (ex + ew, ey + eh), (0, 255, 0), 2)
     # Display the resulting frame
     cv2.imshow("frame", frame)
     if cv2.waitKey(20) & 0xFF == ord("q"):
