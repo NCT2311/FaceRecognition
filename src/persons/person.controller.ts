@@ -10,8 +10,8 @@ export class PersonController {
     @Render('intro/index')
     async index() {
       var person = await this.personService.getPersons();
-      var a = person[0];
-      //console.log(person[1]._id);
+      var a = person;
+      console.log(person);
     }
     @Get()
     async getAll(){

@@ -6,7 +6,7 @@ import { TurnService } from "./turn.service";
 
  
 @Module({
-    imports: [MongooseModule.forFeature([{name: 'Turns', schema: Turnschema}])],
+    imports: [MongooseModule.forFeature([{name: 'turns', schema: Turnschema}])],
     controllers:[TurnController],
     providers: [TurnService],
 })

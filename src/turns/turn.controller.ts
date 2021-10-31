@@ -9,14 +9,14 @@ export class TurnController {
     @Get()
     @Render('intro/index')
     async index() {
-      var turn = await this.turnService.insertTurn(2,"def",false,"617e6b33bc3f80e9cd62ee7b");
-      var list =  await this.turnService.getTurns();
+      // await this.turnService.insertTurn("2243255","ab",true);
+      var list =  await this.turnService.getbyPersonID("617e6b5c5ee18d0ef242a27d");
       console.log(list);
     }
-    @Get()
-    async getAll(){
+    // @Get()
+    // async getAll(){
 
-    }
+    // }
     
     
 }

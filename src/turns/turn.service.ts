@@ -1,39 +1,79 @@
 
 import { InjectModel } from '@nestjs/mongoose';
-import { Injectable } from '@nestjs/common';
-import { Model } from 'mongoose';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { Model, Schema } from 'mongoose';
 import { Turn } from './turn.model';
+
+
 
 @Injectable()
 export class TurnService {
   private turns: Turn[] = [];
 
   constructor(
-    @InjectModel('Turns') private readonly turnModel: Model<Turn>,
+    @InjectModel('turns') private readonly turnModel: Model<Turn>,
   ) {}
 
-  async insertTurn(
-    id: Number,
-    urlimg: string,
-    Status: Boolean,
-    Personid: String,
-  ) {
+  async insertTurn( urlimg: string,Personid: string, Status: Boolean  ) {
     const newTurn = new this.turnModel({
-      id,
       urlimg,
+      Personid,
       Status,
-      Personid
     });
     const result = await newTurn.save();
     return result.id as string;
   }
 
-  async editTurn(turn: Turn) {
-    this.turnModel.updateOne(turn);
+  async editTurn(
+    turnId: string,
+    urlimg: string,
+    Status: Boolean,
+  ) {
+    const update =await this.turnModel.findById(turnId);
+    update.Status = Status;
+    update.urlimg = urlimg;
+    update.save();
   }
-  async getTurns(){
-    const result  = await this.turnModel.find();
+  async getSingTurn(turnId: string){
+    const result = await this.turnModel.findById(turnId);
+    return {
+      id: result.id,
+      urlimg: result.urlimg,
+      Personid: result.Personid,
+      Status: result.Status,
+
+    }
+  }
+  
+  async getbyPersonID(a: String){
+    const data = await this.turnModel.find();
+    
+    // console.log(result[0].Personid.toString());
+
+
+    //chiêu cuối
+    //  const data =  await this.getTurns();
+    let result = new Array();
+    for (var i = 0 ; i < data.length ; i++) {
+      if (data[i].Personid.toString() == a){
+        result.push(data[i]);
+      }
+    }
+    return result;
+
+  }
+  async deleteTurn(turnId: string){
+    await this.turnModel.deleteOne({_id: turnId}).exec();
+  }
+  async getTurns() {
+    const turns = await this.turnModel.find().exec();
     //console.log(result);
-    return [...result];
+    return turns.map((prod) => ({
+      id: prod.id,
+      urlimg: prod.urlimg,
+      Personid: prod.Personid,
+      Status: prod.Status,
+    }));
   }
+
 }

@@ -6,7 +6,7 @@ import * as mongoose from 'mongoose';
 
 
 export const Personschema = new mongoose.Schema({
-  id: Number,
+
   Fname:  String, // String is shorthand for {type: String}
   Lname: String,
   Status:   Boolean,
@@ -15,8 +15,8 @@ export const Personschema = new mongoose.Schema({
   
 }
 );
-export interface Person {
-        id: Number;
+export interface Person  extends mongoose.Document {
+        id: String;
         Fname: string;
         Lname: string;
         Status: Boolean;
