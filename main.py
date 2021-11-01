@@ -13,7 +13,7 @@ class UserWork:
         priority = int(input("Select priority: "))
         newUser = {"_id": cur_id, "name": name, "priority": priority}
         mongodb.users.insert_one(newUser)
-        self.addHistoryEvent("add new user", name)
+        self.addHistoryEvent("add new user", cur_id, name)
         storeUserImage(name)
 
     def removeUser(self, name):
@@ -22,14 +22,14 @@ class UserWork:
         shutil.rmtree('user_capture/' + str(name))
         print("done!")
 
-    def addHistoryEvent(self, type, name):
+    def addHistoryEvent(self, type, id, name):
         timeEvent = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         if (type == "add new user"):
             timeEvent = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             message = name + ' added'
         elif (type == "remove user"):
             message = name + ' removed'
-        post = {"_time": timeEvent, "message": message}
+        post = {"_id": id, "time": timeEvent, "message": message}
         mongodb.history.insert_one(post)
     
     def removeHistory(self):
@@ -41,7 +41,10 @@ class UserWork:
 
 if __name__ == '__main__':
     collection = UserWork()
-    #collection.addUser()    # add new user
-    #collection.removeUser('vuu')
-    #collection.removeUser('vunguyenduy')
+    # collection.removeHistory()
+    # collection.addUser()    # add new user
+    collection.removeUser('eng tin')
+    # collection.removeUser('vunguyenduy')
+    # collection.removeHistory()
+    mongodb.queryFromDB()
     
