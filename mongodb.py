@@ -10,30 +10,41 @@ My DB named "DoorLock" has two Collections:
     + History: store userEvent(add new user, remove user).
 CONNECTING STRING FORM: "mongodb+srv://<USER>:<PASSWORD>@<CLUSTER>/<user>?ssl=true&ssl_cert_reqs=CERT_NONE"
 '''
+
 # connect to DB
-cluster = MongoClient("mongodb+srv://duyvu1109:Duyvu1109@cluster0.jzoff.mongodb.net/DoorLock?ssl=true&ssl_cert_reqs=CERT_NONE")
+cluster = MongoClient("mongodb+srv://hda1010:duyanh123@cluster0.ukowb.mongodb.net/facerecognition?retryWrites=true&w=majority")
 # open DoorLock
-db = cluster["DoorLock"]
+db = cluster["facerecognition"]
 # open User collection
-users = db["User"]
+persons = db["persons"]
 # open History collection
-history = db["History"]
+turns = db["turns"]
 
 def queryFromDB():
     if not os.path.exists('users.json') and not os.path.exists('history.json'):
-        open('users.json', 'a').close()
-        open('history.json', 'a').close()
+        open('persons.json', 'a').close()
+        open('turns.json', 'a').close()
     from bson.json_util import dumps
-    UsersData = users.find()
-    HistoryData = history.find()
+    UsersData = persons.find()
+    HistoryData = turns.find()
     listUser = list(UsersData)
     listHistory = list(HistoryData)
     # Converting to the JSON
     json_data = dumps(listUser, indent = 2) 
-    with open('users.json', 'w') as file:
+    with open('persons.json', 'w') as file:
         file.write(json_data)
     file.close()
     json_data = dumps(listHistory, indent = 2) 
-    with open('history.json', 'w') as file:
+    with open('turns.json', 'w') as file:
         file.write(json_data)
     file.close()
+
+# queryFromDB()
+
+
+
+def searchByName(id):
+    persons.find()
+    for entry in persons:
+        pass
+    pass

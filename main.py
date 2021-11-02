@@ -1,50 +1,57 @@
+import pymongo
 import mongodb
-from face_reg import storeUserImage
 from datetime import datetime
 import shutil
+from time import sleep
 
-class UserWork:
-    def addUser(self):
-        cur_id = mongodb.users.count_documents({})
-        name = str(input("Type your name: "))
-        while not self.existsUser(name):
-            print("User already exists, try again!")
-            name = str(input("Type your name: "))
-        priority = int(input("Select priority: "))
-        newUser = {"_id": cur_id, "name": name, "priority": priority}
-        mongodb.users.insert_one(newUser)
-        self.addHistoryEvent("add new user", cur_id, name)
-        storeUserImage(name)
-
-    def removeUser(self, name):
-        mongodb.users.delete_one({'name': name})
-        self.addHistoryEvent("remove user", name)
-        shutil.rmtree('user_capture/' + str(name))
-        print("done!")
-
-    def addHistoryEvent(self, type, id, name):
-        timeEvent = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        if (type == "add new user"):
-            timeEvent = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            message = name + ' added'
-        elif (type == "remove user"):
-            message = name + ' removed'
-        post = {"_id": id, "time": timeEvent, "message": message}
-        mongodb.history.insert_one(post)
+class Excute:
+    # def removeUser(self, name):
+    #     mongodb.persons.delete_one({'name': name})
+    #     self.addHistoryEvent("remove user", name)
+    #     shutil.rmtree('user_capture/' + str(name))
+    #     print("done!")
     
-    def removeHistory(self):
-        mongodb.history.delete_many({})
+    # def removeHistory(self):
+    #     mongodb.turns.delete_many({})
 
-    def existsUser(self, name):
-        return mongodb.users.count_documents({"name": name}) == 0
+    # def existsUser(self, name):
+    #     return mongodb.persons.count_documents({"name": name}) == 0
+
+    # using for stranger
+    def addPerson(self, Fname, Lname):
+        id = mongodb.persons.count_documents({})
+        Fname = Fname
+        Lname = Lname
+        createAt, updateAt = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        newPerson = {"id": id, "Fname": Fname, "Lname": Lname, "Status": False, "createAt": createAt, "updateAt": updateAt, "__v": 0}
+        mongodb.persons.insert_one(newPerson)
+
+    def addTurn(self, id, urlimg, Status, Personid, __v):
+        timeEvent = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        newPost = {"urlimg": urlimg, "Status": Status, "Personid": Personid, "createAt": timeEvent, "__v": __v}
+        mongodb.turns.insert_one(newPost)
+
+    def receiveResponse(self, responseFromDB):
+        '''Get response from DB'''
+        for countdonw in range(60):
+            if (responseFromDB):
+                return '''Door open'''
+            sleep(5)
+        return '''Door still lock'''
 
 
 if __name__ == '__main__':
-    collection = UserWork()
-    # collection.removeHistory()
-    # collection.addUser()    # add new user
-    collection.removeUser('eng tin')
-    # collection.removeUser('vunguyenduy')
-    # collection.removeHistory()
-    mongodb.queryFromDB()
+    collection = Excute()
+    
+    while True:
+        '''Begin detect face, after that, get Name, ImageUrl, ID to continue'''
+        isPerson = False
+        if (isPerson):
+            collection.addTurn('bla', '/.png', False, 0, 0)
+        else:
+            collection.addPerson('Fname', 'Lname')
+            collection.addTurn('bla', '/.png', False, 0, 0)
+        pass
+
+    
     
