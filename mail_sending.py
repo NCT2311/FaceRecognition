@@ -7,23 +7,21 @@
 
 import smtplib, ssl
 
-port = 465
+def sendMail(link):
+    port = 465
 
-sender = 'doorlock.bot@gmail.com'
-password = 'datkll211'
+    sender = 'doorlock.bot@gmail.com'
+    password = 'datkll211'
 
-recieve = 'duyvu1109@gmail.com'
+    recieve = 'duyvu1109@gmail.com'
 
-message = """\
-Subject: TEST
-1,2,3 zoooooo.
-"""
+    message = link
 
-context = ssl.create_default_context()
+    context = ssl.create_default_context()
 
-print("Starting to send")
-with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
-    server.login(sender, password)
-    server.sendmail(sender, recieve, message)
+    print("Starting to send")
+    with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
+        server.login(sender, password)
+        server.sendmail(sender, recieve, message)
 
-print("sent email!")
+    print("sent email!")

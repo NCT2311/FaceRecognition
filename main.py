@@ -3,6 +3,7 @@ import mongodb
 from datetime import datetime
 import shutil
 from time import sleep
+from mail_sending import sendMail
 
 class Excute:
     # def removeUser(self, name):
@@ -51,6 +52,7 @@ if __name__ == '__main__':
         else:
             collection.addPerson('Fname', 'Lname')
             collection.addTurn('bla', '/.png', False, 0, 0)
+            sendMail('https://linkToResponse.')
         pass
 
     
