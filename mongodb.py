@@ -52,3 +52,10 @@ def receiveResponse():
             return '''Door open'''
         sleep(5)
     return '''Door still lock'''
+
+# get Person ID
+def searchByName(name):
+    for entry in persons.find():
+        if entry.name == name:
+            return entry.get('_id')
+    return '''Can't find'''

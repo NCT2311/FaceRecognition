@@ -52,6 +52,8 @@ if __name__ == '__main__':
             collection.addPerson('Fname', 'Lname')
             collection.addTurn('bla', imgUrl, False, 0, 0)
             sendMail('https://linkToResponse.')
+            mongodb.receiveResponse()
+
         pass
 
     
