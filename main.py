@@ -45,12 +45,13 @@ if __name__ == '__main__':
 
         '''After detection, continue...'''
         imgUrl = getImageUrl()
+        personID = mongodb.searchByName(name='NoName')
         isPerson = False
         if (isPerson):
-            collection.addTurn('bla', imgUrl, False, 0, 0)
+            collection.addTurn('bla', imgUrl, False, personID, 0)
         else:
             collection.addPerson('Fname', 'Lname')
-            collection.addTurn('bla', imgUrl, False, 0, 0)
+            collection.addTurn('bla', imgUrl, False, personID, 0)
             sendMail('https://linkToResponse.')
             mongodb.receiveResponse()
 
