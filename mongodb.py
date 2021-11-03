@@ -3,6 +3,7 @@ THIS MODULE IS USED TO CONNECT TO DB via MongoDB
 '''
 from pymongo import MongoClient
 import os
+from time import sleep
 '''
 Using Mongodb to store Data:
 My DB named "DoorLock" has two Collections:
@@ -41,10 +42,13 @@ def queryFromDB():
 
 # queryFromDB()
 
-
-
-def searchByName(id):
-    persons.find()
-    for entry in persons:
-        pass
-    pass
+# get response from DB
+def receiveResponse():
+    response = False
+    for timeRemain in range(60):
+        '''Query from DB to get response'''
+        response = turns.find_one({}, {id: 0}).response
+        if (response):
+            return '''Door open'''
+        sleep(5)
+    return '''Door still lock'''

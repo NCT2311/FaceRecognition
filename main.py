@@ -1,9 +1,10 @@
-import pymongo
 import mongodb
 from datetime import datetime
 import shutil
 from time import sleep
 from mail_sending import sendMail
+import os
+import glob
 
 class Excute:
     # def removeUser(self, name):
@@ -21,8 +22,6 @@ class Excute:
     # using for stranger
     def addPerson(self, Fname, Lname):
         id = mongodb.persons.count_documents({})
-        Fname = Fname
-        Lname = Lname
         createAt, updateAt = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         newPerson = {"id": id, "Fname": Fname, "Lname": Lname, "Status": False, "createAt": createAt, "updateAt": updateAt, "__v": 0}
         mongodb.persons.insert_one(newPerson)
@@ -32,26 +31,26 @@ class Excute:
         newPost = {"urlimg": urlimg, "Status": Status, "Personid": Personid, "createAt": timeEvent, "__v": __v}
         mongodb.turns.insert_one(newPost)
 
-    def receiveResponse(self, responseFromDB):
-        '''Get response from DB'''
-        for countdonw in range(60):
-            if (responseFromDB):
-                return '''Door open'''
-            sleep(5)
-        return '''Door still lock'''
-
+# use for send imgUrl
+def getImageUrl():
+    files = glob.glob('capture\\*.png')
+    imgName = max(files , key=os.path.getctime)	
+    return str(imgName)
 
 if __name__ == '__main__':
     collection = Excute()
     
     while True:
         '''Begin detect face, after that, get Name, ImageUrl, ID to continue'''
+
+        '''After detection, continue...'''
+        imgUrl = getImageUrl()
         isPerson = False
         if (isPerson):
-            collection.addTurn('bla', '/.png', False, 0, 0)
+            collection.addTurn('bla', imgUrl, False, 0, 0)
         else:
             collection.addPerson('Fname', 'Lname')
-            collection.addTurn('bla', '/.png', False, 0, 0)
+            collection.addTurn('bla', imgUrl, False, 0, 0)
             sendMail('https://linkToResponse.')
         pass
 
