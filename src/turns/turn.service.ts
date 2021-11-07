@@ -14,11 +14,12 @@ export class TurnService {
     @InjectModel('turns') private readonly turnModel: Model<Turn>,
   ) {}
 
-  async insertTurn( urlimg: string,Personid: string, Status: Boolean  ) {
+  async insertTurn( urlimg: string,Personid: string, Status: Boolean ,Response: Boolean ) {
     const newTurn = new this.turnModel({
       urlimg,
       Personid,
       Status,
+      Response,
     });
     const result = await newTurn.save();
     return result.id as string;
@@ -28,10 +29,12 @@ export class TurnService {
     turnId: string,
     urlimg: string,
     Status: Boolean,
+    Response : Boolean,
   ) {
     const update =await this.turnModel.findById(turnId);
     update.Status = Status;
     update.urlimg = urlimg;
+    update.Response = Response;
     update.save();
   }
   async getSingTurn(turnId: string){
@@ -41,12 +44,17 @@ export class TurnService {
       urlimg: result.urlimg,
       Personid: result.Personid,
       Status: result.Status,
-
+      Response: result.Response,
     }
   }
   
   async getbyPersonID(a: String){
     const data = await this.turnModel.find();
+  //     relations: ["turns"],
+  //     where: {
+  //       turns: { Personid. : a },
+  //     }
+  // });
     
     // console.log(result[0].Personid.toString());
 
@@ -73,6 +81,8 @@ export class TurnService {
       urlimg: prod.urlimg,
       Personid: prod.Personid,
       Status: prod.Status,
+      Response: prod.Response,
+      CreateAt: prod.createAt,
     }));
   }
 

@@ -1,22 +1,29 @@
-import { Controller, Get, Render, Req } from '@nestjs/common';
+import { Controller, Get, Post, Render, Req } from '@nestjs/common';
 import { TurnService } from './turn.service';
+import { FlagService } from '../flag/flag.service';
 
-
-@Controller('turn')
+@Controller('admin')
 export class TurnController {
-  constructor(private readonly turnService: TurnService) {}
+  constructor(private readonly turnService: TurnService,private readonly FlagService: FlagService) {}
 
     @Get()
-    @Render('intro/index')
+    @Render('turn/index')
     async index() {
       // await this.turnService.insertTurn("2243255","ab",true);
-      var list =  await this.turnService.getbyPersonID("617e6b5c5ee18d0ef242a27d");
-      console.log(list);
-    }
-    // @Get()
-    // async getAll(){
 
-    // }
+    }
+    @Post('/getdata')
+    async getdata2() { 
+      var listflag = await this.FlagService.getFlags();
+      var list =  await this.turnService.getTurns();
+      var index = list.length;
+      var index1 = listflag.length;
+      // console.log(list[index-1].urlimg);
+      return {
+        list: list[index-1],
+        flag:  listflag[index1-1]
+    }
+  }
     
     
 }

@@ -1,0 +1,28 @@
+
+@media (max-width: 575.98px) { }
+
+
+@media (max-width: 767.98px) {  }
+
+
+@media (max-width: 991.98px) {  }
+
+@media (max-width: 1199.98px) { }
+@media (max-width: 1850.98px) { 
+    .row-content{
+        margin:40px 20px 20px 40px;
+    }
+    .h2-data{
+        margin:0px 0px 0px 30px;
+    }
+    .btn.btn-danger{
+        margin:0px 0px 0px 10px;
+    }
+    #id{
+        width: 670px;
+        height: 700px;
+    }
+    .row.row-content1{
+        margin:200px 20px 20px 100px;
+    }
+}
