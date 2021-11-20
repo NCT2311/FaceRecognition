@@ -4,7 +4,6 @@
     Email: doorlock.bot@gmail.com
     Password: datkll211
 '''
-
 import smtplib, ssl
 
 def sendMail(link):
