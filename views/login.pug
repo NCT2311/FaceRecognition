@@ -1,0 +1,49 @@
+doctype html
+head
+  // Required meta tags
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+  title Skydash Admin
+  // plugins:css
+  link(rel='stylesheet' href='../../vendors/feather/feather.css')
+  link(rel='stylesheet' href='../../vendors/ti-icons/css/themify-icons.css')
+  link(rel='stylesheet' href='../../vendors/css/vendor.bundle.base.css')
+  // endinject
+  // Plugin css for this page
+  // End plugin css for this page
+  // inject:css
+  link(rel='stylesheet' href='../../css/vertical-layout-light/style.css')
+  // endinject
+  link(rel='shortcut icon' href='../../images/favicon.png')
+.container-scroller
+  .container-fluid.page-body-wrapper.full-page-wrapper
+    .content-wrapper.d-flex.align-items-center.auth.px-0
+      .row.w-100.mx-0
+        .col-lg-4.mx-auto
+          .auth-form-light.text-left.py-5.px-4.px-sm-5
+            .brand-logo
+              img(src='../../images/logo.svg' alt='logo')
+            h6.font-weight-light Sign in to continue.
+            form.pt-3(action='/login', method='post')
+              .form-group
+                input.form-control.form-control-lg(type='text' placeholder='Username' name='username')
+              .form-group
+                input.form-control.form-control-lg(type='password' placeholder='Password' name = 'password')
+              .mt-3
+                button.btn.btn-block.btn-primary.btn-lg.font-weight-medium.auth-form-btn(type='submit') SIGN IN
+
+    // content-wrapper ends
+  // page-body-wrapper ends
+// container-scroller
+// plugins:js
+script(src='../../vendors/js/vendor.bundle.base.js')
+// endinject
+// Plugin js for this page
+// End plugin js for this page
+// inject:js
+script(src='../../js/off-canvas.js')
+script(src='../../js/hoverable-collapse.js')
+script(src='../../js/template.js')
+script(src='../../js/settings.js')
+script(src='../../js/todolist.js')
+// endinject

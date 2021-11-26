@@ -1,0 +1,84 @@
+extends ../layout.pug
+
+block content
+  .content-wrapper(style='padding-top:0px;')
+    // Content Header (Page header)
+    section.content-header
+      .container-fluid
+        .row.mb-2
+          .col-sm-6
+            h1 Confirm strangers
+          .col-sm-6
+            ol.breadcrumb.float-sm-right
+              li.breadcrumb-item
+                a(href='http://localhost:3000/home') Home
+              li.breadcrumb-item.active Confirm strangers
+      // /.container-fluid
+    // Main content
+    section.content
+      .container-fluid
+        .row
+          .col-12             
+            .card
+              // /.card-header
+              .card-body
+                .row
+                  .col-md-6
+                    .card.tale-bg
+                      img(id='imagecheck'  alt='people')
+                  .col-md-6
+                    .row.row-content
+                      h2 First name:
+                      h2.h2-data(id='firstname')
+                    .row.row-content
+                      h2 Last name:
+                      h2.h2-data(id='lastname')
+                    .row.row-content
+                      h2 Access time:
+                      h2.h2-data(id='timeaccess')
+                    .row.row-content1
+                      button.btn.btn-primary(type='button',id='buttoncheck') 
+                        h1 Confirm
+                      button.btn.btn-danger(type='button',id='buttoncheck1')
+                        h1 Refuse
+                      #confirmPersonModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='confirmPersonModal' aria-hidden='true')
+                          .modal-dialog(role='document')
+                              .modal-content.bg-primary
+                                  .modal-header
+                                      h3.modal-title(style='color: white;') Confirm
+                                      button.close(type='button' data-dismiss='modal' aria-label='Close')
+                                          span(aria-hidden='true') &times;
+                                  form(action="/admin/confirm", method = "post")
+                                      .modal-body
+                                          input(type="hidden", name="id")
+                                          h3(style='color: white;') Do you want to unlock this person?
+                                      .modal-footer
+                                          button.btn.btn.btn-light(type='button' data-dismiss='modal') Close
+                                          button.btn.btn.btn-light(type='submit') Confirm
+                      #refusePersonModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='refusePersonModal' aria-hidden='true')
+                          .modal-dialog(role='document')
+                              .modal-content.bg-danger
+                                  .modal-header
+                                      h3.modal-title(style='color: white;') Refuse
+                                      button.close(type='button' data-dismiss='modal' aria-label='Close')
+                                          span(aria-hidden='true') &times;
+                                  form(action="/admin/refuse", method = "post")
+                                      .modal-body
+                                          input(type="hidden", name="id")
+                                          h3(style='color: white;') Are you sure?
+                                      .modal-footer
+                                          button.btn.btn.btn-light(type='button' data-dismiss='modal') Close
+                                          button.btn.btn.btn-light(type='submit') Confirm
+ 
+
+
+
+
+
+
+
+
+block style 
+    link(rel="stylesheet", href="/create/turn/index.css")
+block script 
+    script(src="/create/turn/index.js")
