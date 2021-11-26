@@ -23,8 +23,9 @@ def make_720p():
 
 
 count = 100
-temp = 0
+temp_id = 0
 flag = 0
+person_name = ""
 make_720p()
 while True:
     # Capture frame-by-frame
@@ -41,9 +42,10 @@ while True:
         if conf >= 45:  # and conf <= 85:
             print(id_)
             # print(labels[id_])
-            if temp != id_:
+            if temp_id != id_:
                 count = 100
-            temp = id_
+            temp_id = id_
+            person_name = labels[id_]
             count = count - 1
             if count == 0:
                 flag = 1
@@ -74,6 +76,7 @@ while True:
     cv2.imshow("frame", frame)
     if flag == 1:
         print("Successfully")
+        print(person_name)
         break
     if cv2.waitKey(20) & 0xFF == ord("q"):
         break

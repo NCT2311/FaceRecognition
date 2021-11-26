@@ -28,7 +28,7 @@ def storeUserImage(name):
         # Press 'q' to exit
         if key == ord("q"):
             break
-        elif count == 100:
+        elif count == 50:
             break
 
     # Release memory
