@@ -22,6 +22,9 @@ def make_720p():
     cap.set(4, 720)
 
 
+count = 100
+temp = 0
+flag = 0
 make_720p()
 while True:
     # Capture frame-by-frame
@@ -37,27 +40,41 @@ while True:
         id_, conf = recognizer.predict(roi_gray)
         if conf >= 45:  # and conf <= 85:
             print(id_)
-            print(labels[id_])
+            # print(labels[id_])
+            if temp != id_:
+                count = 100
+            temp = id_
+            count = count - 1
+            if count == 0:
+                flag = 1
+                break
+
             font = cv2.FONT_HERSHEY_SIMPLEX
             name = labels[id_]
             color = (255, 255, 255)
             stroke = 2
             cv2.putText(frame, name, (x, y), font, 1, color, stroke, cv2.LINE_AA)
 
+        # Create last photo into folder
         img_item = "my-image.png"
         cv2.imwrite(img_item, roi_color)
+
         # Draw a Rectangle
         color = (255, 0, 0)  # BGR 0 - 255
         stroke = 2
         end_cord_x = x + w  # Width of Rectangle
         end_cord_y = y + h  # Height of Recctangle
         cv2.rectangle(frame, (x, y), (end_cord_x, end_cord_y), color, stroke)
+
         # # Recognize by smile_cascades
         # subitems = smile_cascade.detectMultiScale(roi_gray)
         # for (ex, ey, ew, eh) in subitems:
         #     cv2.rectangle(roi_color, (ex, ey), (ex + ew, ey + eh), (0, 255, 0), 2)
     # Display the resulting frame
     cv2.imshow("frame", frame)
+    if flag == 1:
+        print("Successfully")
+        break
     if cv2.waitKey(20) & 0xFF == ord("q"):
         break
 

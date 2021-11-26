@@ -3,6 +3,7 @@ This function will open webcam and start capture front_face's user
 """
 import cv2
 import os
+import time
 
 
 def storeUserImage(name):
@@ -17,6 +18,7 @@ def storeUserImage(name):
         check, data = video.read()
         faces = face_cascade.detectMultiScale(data, scaleFactor=1.5, minNeighbors=5)
         for x, y, w, h in faces:
+            # if count % 10 == 0:
             cv2.rectangle(data, (x, y), (x + w, y + h), (0, 255, 0), 3)
             cv2.imwrite("./images/" + str(name) + "/" + str(count) + ".jpg", data)
             count += 1
@@ -26,8 +28,9 @@ def storeUserImage(name):
         # Press 'q' to exit
         if key == ord("q"):
             break
-        elif count == 20:
+        elif count == 100:
             break
+
     # Release memory
     video.release()
 
