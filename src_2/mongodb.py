@@ -63,7 +63,9 @@ def searchByName(name):
     return '''Can't find'''
 
 # open Flag collection
-turns = db["flags"]
+flag = db["flags"]
 def updateFlag():
-    
+    f = flag.find_one()
+    newFlag = {"$set":{"Flagcheck": False}}
+    flag.update_one(f, newFlag)
     pass
