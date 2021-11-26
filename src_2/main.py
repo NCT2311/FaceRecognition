@@ -27,7 +27,7 @@ class Excute:
 
     def addTurn(self, urlimg, Status, Personid, __v, Response = False):
         timeEvent = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        newPost = {"urlimg": urlimg, "Status": Status, "Personid": Personid, "createAt": timeEvent, "__v": __v, "Response": Response}
+        newPost = {"_id": 99,"urlimg": urlimg, "Status": Status, "Personid": Personid, "createAt": timeEvent, "__v": __v, "Response": Response}
         mongodb.turns.insert_one(newPost)
 
 # get imgUrl
