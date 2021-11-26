@@ -5,7 +5,6 @@ from mail_sending import sendMail
 import os
 import glob
 
-
 class Excute:
     # using for stranger
     def addPerson(self, Fname, Lname):
