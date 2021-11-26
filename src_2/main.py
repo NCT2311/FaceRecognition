@@ -5,30 +5,30 @@ from mail_sending import sendMail
 import os
 import glob
 
+
 class Excute:
-    # def removeUser(self, name):
-    #     mongodb.persons.delete_one({'name': name})
-    #     self.addHistoryEvent("remove user", name)
-    #     shutil.rmtree('user_capture/' + str(name))
-    #     print("done!")
-    
-    # def removeHistory(self):
-    #     mongodb.turns.delete_many({})
-
-    # def existsUser(self, name):
-    #     return mongodb.persons.count_documents({"name": name}) == 0
-
     # using for stranger
     def addPerson(self, Fname, Lname):
         id = mongodb.persons.count_documents({})
-        createAt, updateAt = datetime.now().strftime('%Y-%m-%d %H:%M:%S'),  datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        newPerson = {"id": id, "Fname": Fname, "Lname": Lname, "Status": False, "createAt": createAt, "updateAt": updateAt, "__v": 0}
+        createAt, updateAt = datetime.now().strftime(
+            "%Y-%m-%d %H:%M:%S"
+        ), datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        newPerson = {
+            "id": id,
+            "Fname": Fname,
+            "Lname": Lname,
+            "Status": False,
+            "createAt": createAt,
+            "updateAt": updateAt,
+            "__v": 0,
+        }
         mongodb.persons.insert_one(newPerson)
 
     def addTurn(self, urlimg, Status, Personid, __v, Response = False):
         timeEvent = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         newPost = {"_id": 99,"urlimg": urlimg, "Status": Status, "Personid": Personid, "createAt": timeEvent, "__v": __v, "Response": Response}
         mongodb.turns.insert_one(newPost)
+
 
 # get imgUrl
 "../img/logo.png"
@@ -39,7 +39,8 @@ def getImageUrl():
     return str(imgUrl)
 
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     collection = Excute()
     collection.addTurn(getImageUrl(), False, 'ok eng DA', 0, True)
     # collection.addPerson('Undefined', 'Undefined')
