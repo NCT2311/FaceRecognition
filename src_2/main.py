@@ -6,13 +6,14 @@ from mail_sending import sendMail
 import os
 import glob
 
+
 class Excute:
     # def removeUser(self, name):
     #     mongodb.persons.delete_one({'name': name})
     #     self.addHistoryEvent("remove user", name)
     #     shutil.rmtree('user_capture/' + str(name))
     #     print("done!")
-    
+
     # def removeHistory(self):
     #     mongodb.turns.delete_many({})
 
@@ -22,47 +23,64 @@ class Excute:
     # using for stranger
     def addPerson(self, Fname, Lname):
         id = mongodb.persons.count_documents({})
-        createAt, updateAt = datetime.now().strftime('%Y-%m-%d %H:%M:%S'),  datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        newPerson = {"id": id, "Fname": Fname, "Lname": Lname, "Status": False, "createAt": createAt, "updateAt": updateAt, "__v": 0}
+        createAt, updateAt = datetime.now().strftime(
+            "%Y-%m-%d %H:%M:%S"
+        ), datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        newPerson = {
+            "id": id,
+            "Fname": Fname,
+            "Lname": Lname,
+            "Status": False,
+            "createAt": createAt,
+            "updateAt": updateAt,
+            "__v": 0,
+        }
         mongodb.persons.insert_one(newPerson)
 
-    def addTurn(self, id, urlimg, Status, Personid, __v, Response = False):
-        timeEvent = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        newPost = {"urlimg": urlimg, "Status": Status, "Personid": Personid, "createAt": timeEvent, "__v": __v, "Response": Response}
+    def addTurn(self, id, urlimg, Status, Personid, __v, Response=False):
+        timeEvent = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        newPost = {
+            "urlimg": urlimg,
+            "Status": Status,
+            "Personid": Personid,
+            "createAt": timeEvent,
+            "__v": __v,
+            "Response": Response,
+        }
         mongodb.turns.insert_one(newPost)
 
+
 # get imgUrl
-'''../img/layout1.png'''
+"""../img/layout1.png"""
+
+
 def getImageUrl():
-    files = glob.glob('capture\\*.png')
-    imgName = max(files , key=os.path.getctime)	
+    files = glob.glob("capture\\*.png")
+    imgName = max(files, key=os.path.getctime)
     return str(imgName)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     collection = Excute()
-    
+
     # collection.addTurn('bla', getImageUrl(), False, 'day la ID', 0, True)
     # collection.addPerson('Undefined', 'Undefined')
 
-
     while True:
-        '''Begin detect face, after that, get Name, ImageUrl, ID to continue'''
-        
-        '''After detection, continue...'''
+        """Begin detect face, after that, get Name, ImageUrl, ID to continue"""
+
+        """After detection, continue..."""
         imgUrl = getImageUrl()
-        personID = mongodb.searchByName(name='NoName')
+        personID = mongodb.searchByName(name="NoName")
         isPerson = False
-        if (isPerson):
-            collection.addTurn('bla', imgUrl, False, personID, 0)
+        if isPerson:
+            collection.addTurn("bla", imgUrl, False, personID, 0)
         else:
-            # add new person to Person Collection   
-            collection.addPerson('Fname', 'Lname')
+            # add new person to Person Collection
+            collection.addPerson("Fname", "Lname")
             # add new Turn
-            collection.addTurn('bla', imgUrl, False, personID, 0)
-            sendMail('https://linkToResponse.')
+            collection.addTurn("bla", imgUrl, False, personID, 0)
+            sendMail("https://linkToResponse.")
             mongodb.receiveResponse()
 
         pass
-
-    
-    
