@@ -21,6 +21,8 @@ persons = db["persons"]
 # open History collection
 turns = db["turns"]
 
+#
+
 def queryFromDB():
     if not os.path.exists('users.json') and not os.path.exists('history.json'):
         open('persons.json', 'a').close()
@@ -59,3 +61,9 @@ def searchByName(name):
         if entry.name == name:
             return entry.get('_id')
     return '''Can't find'''
+
+# open Flag collection
+turns = db["flags"]
+def updateFlag():
+    
+    pass

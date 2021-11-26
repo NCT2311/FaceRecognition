@@ -1,0 +1,39 @@
+[
+  {
+    "_id": {
+      "$oid": "617e6b33bc3f80e9cd62ee7b"
+    },
+    "id": 0,
+    "Fname": "H\u00e0 Duy",
+    "Lname": "Anh",
+    "Status": true,
+    "createAt": {
+      "$date": 1635674931269
+    },
+    "updateAt": {
+      "$date": 1637683782555
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "617e6b5c5ee18d0ef242a27d"
+    },
+    "id": 1,
+    "Fname": "Nguy\u1ec5n C\u00f4ng",
+    "Lname": "Th\u00e0nh",
+    "Status": true,
+    "createAt": {
+      "$date": 1635674972995
+    },
+    "updateAt": {
+      "$date": 1635674972995
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619d00b4b6a2e37dfee279f2"
+    }
+  }
+]
