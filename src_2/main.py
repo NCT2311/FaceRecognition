@@ -25,23 +25,20 @@ class Excute:
 
     def addTurn(self, urlimg, Status, Personid, __v, Response = False):
         timeEvent = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        newPost = {"_id": 99,"urlimg": urlimg, "Status": Status, "Personid": Personid, "createAt": timeEvent, "__v": __v, "Response": Response}
+        newPost = {"urlimg": urlimg, "Status": Status, "Personid": Personid, "createAt": timeEvent, "__v": __v, "Response": Response}
         mongodb.turns.insert_one(newPost)
 
 
 # get imgUrl
-"../img/logo.png"
 def getImageUrl():
-    files = glob.glob('public\img\*.png')
-    imgName = max(files ,key=os.path.getctime)	
-    imgUrl = "../img/" + imgName[11::]
+    files = glob.glob('..\public\img\*.png')
+    imgName = max(files, key=os.path.getctime)	
+    imgUrl = "../img/" + imgName[14::]
     return str(imgUrl)
-
-
 
 if __name__ == "__main__":
     collection = Excute()
-    collection.addTurn(getImageUrl(), False, 'ok eng DA', 0, True)
+    collection.addTurn(getImageUrl(), False, 'ok eng Vu', 0, True)
     # collection.addPerson('Undefined', 'Undefined')
 
     # while True:

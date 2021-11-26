@@ -22,7 +22,7 @@ def make_720p():
     cap.set(4, 720)
 
 
-count = 50
+count = 100
 temp_id = 0
 flag = 0
 person_name = ""
