@@ -47,8 +47,8 @@ export class TurnService {
       Response: result.Response,
     }
   }
-  
-  async getbyPersonID(a: String){
+    
+  async getbyPersonID(a: string){
     const data = await this.turnModel.find();
   //     relations: ["turns"],
   //     where: {

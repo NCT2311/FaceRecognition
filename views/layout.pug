@@ -75,7 +75,7 @@ head
             a.dropdown-item
               i.ti-settings.text-primary
               |                 Settings
-            a.dropdown-item
+            a.dropdown-item(href='logout')
               i.ti-power-off.text-primary
               |                 Logout
         li.nav-item.nav-settings.d-none.d-lg-flex
@@ -227,22 +227,23 @@ head
     nav#sidebar.sidebar.sidebar-offcanvas
         ul.nav
             li.nav-item
-                a.nav-link(href='/admin/camera')
+                a.nav-link(href='/admin')
                     i.icon-camera.menu-icon
                     span.menu-title Confirm strangers
             li.nav-item
-                a.nav-link(data-toggle='collapse', href='#ui-basic', aria-expanded='false', aria-controls='ui-basic')
-                    i.icon-layout.menu-icon
-                    span.menu-title Course
-                    i.menu-arrow
-            #ui-basic.collapse
-                ul.nav.flex-column.sub-menu
-                    li.nav-item
-                        a.nav-link(href='pages/ui-features/buttons.html') Anipulation
-                    li.nav-item
-                        a.nav-link(href='pages/ui-features/dropdowns.html') Dropdowns
-                    li.nav-item
-                        a.nav-link(href='pages/ui-features/typography.html') Typography
+                a.nav-link(href='/user')
+                    i.ti-user.menu-icon
+                    span.menu-title User infomation
+            li.nav-item
+                a.nav-link(href='/history')
+                    i.ti-search.menu-icon
+                    span.menu-title Acquaintance History
+            li.nav-item
+                a.nav-link(href='/alldata')
+                    i.ti-search.menu-icon
+                    span.menu-title All history                   
+
+
     .main-panel
       .content-wrapper(style='padding-bottom:0px;padding-top:25px;')
         block content 

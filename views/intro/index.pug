@@ -18,19 +18,8 @@ nav.navbar.navbar-expand-lg.navbar-dark.navbar-top
           a.nav-link(href='#') Home 
         li.nav-item
           a.nav-link(href='#')  About 
-        li.nav-item
-          a.nav-link(href='#')  Services 
-        li.nav-item.dropdown
-          a.nav-link(href='#')  Dropdown
-          .nut_dropdown
-            .noidung_dropdown
-              a(href='#') &Dstrok;&#x1B0;&#x1EDD;ng D&#x1EAB;n 1
-              a(href='#') &Dstrok;&#x1B0;&#x1EDD;ng D&#x1EAB;n 2
-              a(href='#') &Dstrok;&#x1B0;&#x1EDD;ng D&#x1EAB;n 3
-    // navbar-collapse.//
-    form.form-inline.search
-      input.form-control.mr-sm-2(type='search', placeholder='Search', aria-label='Search')
-      button.btn.btn-outline-primary.my-2.my-sm-0(type='submit') Search
+
+    a.btn.btn-secondary.my-2.my-sm-0(type='button' href='login') Đăng nhập
   // container-fluid.//
 div
   .row
@@ -46,11 +35,12 @@ div
                 span CONFIRM STRANGER
         .button2
           .center1
-            button.btnn1
-              svg.border(width='145px', height='60px', viewbox='0 0 145 60')
-                polyline.bg-line(points='179,1 179,59 1,59 1,1 179,1')
-                polyline.hl-line(points='179,1 179,59 1,59 1,1 179,1')
-              span HISTORY
+            a(href='http://localhost:3000/history')
+              button.btnn1
+                svg.border(width='145px', height='60px', viewbox='0 0 145 60')
+                  polyline.bg-line(points='179,1 179,59 1,59 1,1 179,1')
+                  polyline.hl-line(points='179,1 179,59 1,59 1,1 179,1')
+                span HISTORY
       .container
         .title
           | SMART DOOR LOCKS

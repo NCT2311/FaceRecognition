@@ -1,4 +1,5 @@
-import { Controller, Get, Render, Req } from '@nestjs/common';
+import { Controller, Get, Render, Req, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { FlagService } from './Flag.service';
 
 
@@ -7,6 +8,7 @@ export class FlagController {
   constructor(private readonly FlagService: FlagService) {}
 
     @Get()
+    @UseGuards(AuthGuard('jwt'))
     @Render('intro/index')
     async index() {
 
@@ -15,10 +17,7 @@ export class FlagController {
     //   var a = Flag;
     //   console.log(Flag);
     }
-    @Get()
-    async getAll(){
 
-    }
     
     
 }

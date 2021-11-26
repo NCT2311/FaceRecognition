@@ -21,7 +21,7 @@ export class FlagService {
 
   async editFlag(
       id:string,
-    Flagcheck: Boolean,
+      Flagcheck: Boolean,
   ) {
     const update =await this.FlagModel.findById(id);
     update.Flagcheck = Flagcheck;
@@ -31,7 +31,7 @@ export class FlagService {
     const result = await this.FlagModel.findById(FlagId);
     return {
       Flagcheck: result.Flagcheck,
-
+      id: result.id,
     }
   }
   async deleteFlag(FlagId: string){
@@ -42,6 +42,7 @@ export class FlagService {
     //console.log(result);
     return Flags.map((prod) => ({
       Flagcheck: prod.Flagcheck,
+      id: prod.id,
     }));
   }
   // private async findFlag(id: string): Promise<Model<Flag>> {

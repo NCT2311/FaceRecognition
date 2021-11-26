@@ -6,26 +6,36 @@ $(document).ready(function () {
         //console.log(data.flag.Flagcheck);
         if (data.flag.Flagcheck==false) {
             document.getElementById('imagecheck').src = '../img/layout1.png';
-        }
-
-        else
-            document.getElementById('imagecheck').src = data.list.urlimg;
-        if(!data.list.status && data.flag.Flagcheck==false ){
             firtname.innerHTML = "Undefined";
             lastname.innerHTML = "Undefined";
             timeaccess.innerHTML ="Undefined";
         }
         else{
-            if(!data.list.status && data.flag.Flagcheck==true){
+            document.getElementById('imagecheck').src = data.list.urlimg;
+            if(!data.list.Status && data.flag.Flagcheck==true){
                 firtname.innerHTML = "Undefined";
                 lastname.innerHTML = "Undefined";
                 timeaccess.innerHTML =data.list.CreateAt;
                 console.log(data.list.CreateAt);
             }
             else{
-                // gọi API lấy data người quen
+                    // Hơi thừa vì nếu là người quen thì ko flag check
+                if(data.list.Status && data.flag.Flagcheck==true){
+                    $.post('/admin/getinfo', {id: data.list.Personid}, function (data2) {
+                        //console.log(data2);
+                        firtname.innerHTML = data2.person.Fname;
+                        lastname.innerHTML = data2.person.Lname;
+                        timeaccess.innerHTML =data.list.CreateAt;
+                    });
+                }
             }
         }
+        $('#buttoncheck').click(function(e){
+            $('#confirmPersonModal').modal('show');
+        })
+        $('#buttoncheck1').click(function(e){
+            $('#refusePersonModal').modal('show');
+        })
     });
     
 });

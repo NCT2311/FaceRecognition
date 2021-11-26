@@ -26,11 +26,13 @@ export class PersonService {
     Fname: string,
     Lname: string,
     Status: Boolean,
+    updateAt: Date,
   ) {
     const update =await this.personModel.findById(personId);
     update.Status = Status;
     update.Fname = Fname;
     update.Lname = Lname;
+    update.updateAt = updateAt;
     update.save();
   }
   async getSingPerson(personId: string){
@@ -40,6 +42,7 @@ export class PersonService {
       Fname: result.Fname,
       Lname: result.Lname,
       Status: result.Status,
+      updateAt : result.updateAt,
 
     }
   }

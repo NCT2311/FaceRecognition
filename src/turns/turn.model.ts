@@ -13,8 +13,8 @@ export const Turnschema = new mongoose.Schema({
 
 });
 export interface Turn {
-         id: String;
-        urlimg: String;
+         id: string;
+        urlimg: string;
         Status: Boolean;
         Response : Boolean;
         Personid: { type: Schema.Types.ObjectId, ref: 'Person' };
