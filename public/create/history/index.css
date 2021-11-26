@@ -1,0 +1,10 @@
+.dataimg {
+    transition:transform 0.25s ease;
+}
+
+.dataimg:hover {
+    -webkit-transform:scale(20); /* or some other value */
+    transform:scale(20);
+    position: absolute;
+    z-index: 3;
+}
