@@ -57,13 +57,11 @@ def receiveResponse():
 
 # get Person ID
 def searchByName():
-    for entry in persons.find():
+    for entry in persons.find_one({}, {'id': 3}):
         print(entry)
         # if entry.name == name:
         #     return entry.get('_id')
     return '''Can't find'''
-
-searchByName()
 
 # open Flag collection
 flag = db["flags"]

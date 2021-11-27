@@ -16,7 +16,7 @@ def sendMail(link):
     '''Type your email'''
     recieve = 'duyvu1109@gmail.com'
 
-    msg = MIMEText(u'<a href={0}>click here</a>'.format(link),'html')
+    msg = MIMEText(u'Someone is coming, <a href={0}>click here</a> for more infomation'.format(link),'html')
 
     context = ssl.create_default_context()
 
