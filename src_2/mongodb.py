@@ -56,11 +56,14 @@ def receiveResponse():
     return '''Door still lock'''
 
 # get Person ID
-def searchByName(name):
+def searchByName():
     for entry in persons.find():
-        if entry.name == name:
-            return entry.get('_id')
+        print(entry)
+        # if entry.name == name:
+        #     return entry.get('_id')
     return '''Can't find'''
+
+searchByName()
 
 # open Flag collection
 flag = db["flags"]
@@ -68,4 +71,8 @@ def updateFlag():
     f = flag.find_one()
     newFlag = {"$set":{"Flagcheck": False}}
     flag.update_one(f, newFlag)
-    pass
+
+def deleteTurn():
+    turns.delete_many({})
+    return 'delete all turns'
+# deleteTurn()

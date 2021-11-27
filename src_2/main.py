@@ -28,7 +28,6 @@ class Excute:
         newPost = {"urlimg": urlimg, "Status": Status, "Personid": Personid, "createAt": timeEvent, "__v": __v, "Response": Response}
         mongodb.turns.insert_one(newPost)
 
-
 # get imgUrl
 def getImageUrl():
     files = glob.glob('..\public\img\*.png')
@@ -38,7 +37,7 @@ def getImageUrl():
 
 if __name__ == "__main__":
     collection = Excute()
-    collection.addTurn(getImageUrl(), False, 'ok eng Vu', 0, True)
+    # collection.addTurn(getImageUrl(), False, 'ok eng Vu', 0, True)
     # collection.addPerson('Undefined', 'Undefined')
 
     # while True:
