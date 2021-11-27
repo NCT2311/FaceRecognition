@@ -5,6 +5,7 @@
     Password: datkll211
 """
 import smtplib, ssl
+from email.mime.text import MIMEText
 
 
 def sendMail(link):
@@ -13,15 +14,19 @@ def sendMail(link):
     sender = "doorlock.bot@gmail.com"
     password = "datkll211"
 
+    """Type your email"""
     recieve = "nguyencongthanh23111@gmail.com"
 
-    message = "abc"
+    msg = MIMEText(u"<a href={0}>click here</a>".format(link), "html")
 
     context = ssl.create_default_context()
 
     print("Starting to send")
     with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
         server.login(sender, password)
-        server.sendmail(sender, recieve, message)
+        server.sendmail(sender, recieve, str(msg))
 
-    print("Sent email!")
+    print("sent email!")
+
+
+# sendMail("https://localhost:3000")
