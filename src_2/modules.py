@@ -63,6 +63,14 @@ class Mongo:
     def clearTurn(self):
         turns.delete_many({})
         return 'delete all turns'
+    
+    def getNameById(self, id):
+        Fname, Lname = "",""
+        for person in persons.find():
+            if str(person['_id']) == id:
+                Fname, Lname = person['Fname'], person['Lname']
+        return Fname, Lname
+
 ###########################################################################################################
 class Control:
     def addPerson(self, Fname, Lname, status=True):
@@ -99,7 +107,7 @@ class Control:
     Email: doorlock.bot@gmail.com
     Password: datkll211
 '''
-def sendMail(link, id, Fname = 'Undefined', Lname = 'Undefined'):
+def sendMail(link, Fname = 'Undefined', Lname = 'Undefined'):
     port = 465
 
     time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
