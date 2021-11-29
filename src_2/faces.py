@@ -21,12 +21,12 @@ def make_720p():
     cap.set(3, 1280)
     cap.set(4, 720)
 
-
 count = 100
 temp_id = 0
 flag = 0
 person_name = ""
 make_720p()
+
 while True:
     # Capture frame-by-frame
     ret, frame = cap.read()
@@ -40,7 +40,7 @@ while True:
         # Recognize: Deep learned model predict keras tensorflow pytorch scikit learn
         id_, conf = recognizer.predict(roi_gray)
         if conf >= 45:  # and conf <= 85:
-            print(id_)
+            # print(id_)
             # print(labels[id_])
             if temp_id != id_:
                 count = 100
@@ -58,8 +58,8 @@ while True:
             cv2.putText(frame, name, (x, y), font, 1, color, stroke, cv2.LINE_AA)
 
         # Create last photo into folder
-        img_item = "my-image.png"
-        cv2.imwrite(img_item, roi_color)
+        # img_item = "my-image.png"
+        # cv2.imwrite(img_item, roi_color)
 
         # Draw a Rectangle
         color = (255, 0, 0)  # BGR 0 - 255
