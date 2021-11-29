@@ -13,10 +13,12 @@ def newPerson():
     id = persons.find().sort('_id', pymongo.DESCENDING).limit(1)[0]['_id']
     # creater new directory in user_capture
     os.makedirs("./images/" + str(id))
-    return 'added {} new person to dataset'.format(str(id)), str(id)
+    return 'Add {} to dataset'.format(Fname + Lname), str(id)
 
 def storeUserImage():
-    newDataSet = newPerson()[1]
+    msg, newDataSet = newPerson()
+    print(msg)
+    print('Start create dataset...')
     face_cascade = cv2.CascadeClassifier(
         "./cascades/data/haarcascade_frontalface_alt.xml"
     )
@@ -26,17 +28,17 @@ def storeUserImage():
         check, data = video.read()
         faces = face_cascade.detectMultiScale(data, scaleFactor=1.5, minNeighbors=5)
         for x, y, w, h in faces:
-            cv2.rectangle(data, (x, y), (x + w, y + h), (0, 255, 0), 3)
+            # cv2.rectangle(data, (x, y), (x + w, y + h), (0, 255, 0), 3)
             cv2.imwrite("./images/" + newDataSet + "/" + str(count) + ".jpg", data)
             count += 1
         cv2.waitKey(3)
         cv2.imshow("Face Detect", data)
         key = cv2.waitKey(1)
-        
+
         # Press 'q' to exit
         if key == ord("q") or count == 65:
             break
-
+    print('added!')
     # Release memory
     video.release()
 

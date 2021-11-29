@@ -38,9 +38,7 @@ while True:
         roi_color = frame[y : y + h, x : x + w]
         # Recognize: Deep learned model predict keras tensorflow pytorch scikit learn
         id_, conf = recognizer.predict(roi_gray)
-        if conf >= 45:  # and conf <= 85:
-            # print(id_)
-            # print(labels[id_])
+        if conf >= 45:
             if temp_id != id_:
                 count = 100
             temp_id = id_
