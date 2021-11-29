@@ -2,8 +2,11 @@
     THIS MODULE IS USED TO CONNECT TO DB via MongoDB
 '''
 from pymongo import MongoClient
-import os
+import os, glob
 from time import sleep
+import smtplib, ssl
+from email.mime.text import MIMEText
+from datetime import datetime
 '''
 Using Mongodb to store Data:
 My DB named "DoorLock" has two Collections:
@@ -62,12 +65,8 @@ class Mongo:
         return 'delete all turns'
 
 ###########################################################################################################
-from datetime import datetime
-import os
-import glob
-
 class Control:
-    def addPerson(self,Fname, Lname, status=True):
+    def addPerson(self, Fname, Lname, status=True):
         id = persons.count_documents({})
         createAt, updateAt = datetime.now().strftime(
             "%Y-%m-%d %H:%M:%S"
@@ -89,12 +88,11 @@ class Control:
         turns.insert_one(newPost)
 
     # get imgUrl
-    def getImageUrl():
+    def getImageUrl(self):
         files = glob.glob('..\public\img\*.png')
         imgName = max(files, key=os.path.getctime)	
         imgUrl = "../img/" + imgName[14::]
         return str(imgUrl)
-
 ###########################################################################################################
 '''
     This module used to send email automatic via email-bot chat named "doorlock.bot",
@@ -102,10 +100,6 @@ class Control:
     Email: doorlock.bot@gmail.com
     Password: datkll211
 '''
-import smtplib, ssl
-from email.mime.text import MIMEText
-from datetime import datetime
-
 def sendMail(link, id, Fname = 'Undefined', Lname = 'Undefined'):
     port = 465
 
@@ -133,3 +127,8 @@ def sendMail(link, id, Fname = 'Undefined', Lname = 'Undefined'):
     print("sent email!")
 
 # sendMail('https://localhost:3000', id = None, Fname = 'ndvu', Lname = '')
+
+###########################################################################################################
+'''
+    Another modules
+'''
