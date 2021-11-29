@@ -4,7 +4,7 @@ This function will open webcam and start capture front_face's user
 import cv2
 import os
 import pymongo
-from modules import persons, Control, Mongo
+from modules import persons, Control
 
 def newPerson():
     Fname = str(input("Type your first name: "))
@@ -26,13 +26,13 @@ def storeUserImage():
         check, data = video.read()
         faces = face_cascade.detectMultiScale(data, scaleFactor=1.5, minNeighbors=5)
         for x, y, w, h in faces:
-            # if count % 10 == 0:
             cv2.rectangle(data, (x, y), (x + w, y + h), (0, 255, 0), 3)
             cv2.imwrite("./images/" + newDataSet + "/" + str(count) + ".jpg", data)
             count += 1
         cv2.waitKey(3)
         cv2.imshow("Face Detect", data)
         key = cv2.waitKey(1)
+        
         # Press 'q' to exit
         if key == ord("q") or count == 65:
             break

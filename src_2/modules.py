@@ -51,8 +51,7 @@ class Mongo:
             '''Query from DB to get response'''
             response = flag.find_one({})['Response']
             if (response):
-                print('day roi')
-                # return '''Door open'''
+                return '''Door open'''
             sleep(1)
         return '''Door still lock'''
 

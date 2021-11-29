@@ -1,4 +1,3 @@
-import numpy as np
 import cv2
 import pickle
 
@@ -47,19 +46,16 @@ while True:
             temp_id = id_
             person_name = labels[id_]
             count = count - 1
+
             if count == 0:
                 flag = 1
                 break
-
+            
             font = cv2.FONT_HERSHEY_SIMPLEX
             name = labels[id_]
             color = (255, 255, 255)
             stroke = 2
             cv2.putText(frame, name, (x, y), font, 1, color, stroke, cv2.LINE_AA)
-
-        # Create last photo into folder
-        # img_item = "my-image.png"
-        # cv2.imwrite(img_item, roi_color)
 
         # Draw a Rectangle
         color = (255, 0, 0)  # BGR 0 - 255
@@ -68,12 +64,9 @@ while True:
         end_cord_y = y + h  # Height of Recctangle
         cv2.rectangle(frame, (x, y), (end_cord_x, end_cord_y), color, stroke)
 
-        # # Recognize by smile_cascades
-        # subitems = smile_cascade.detectMultiScale(roi_gray)
-        # for (ex, ey, ew, eh) in subitems:
-        #     cv2.rectangle(roi_color, (ex, ey), (ex + ew, ey + eh), (0, 255, 0), 2)
     # Display the resulting frame
     cv2.imshow("frame", frame)
+
     if flag == 1:
         print("Successfully")
         print(person_name)

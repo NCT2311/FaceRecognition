@@ -19,17 +19,12 @@ for root, dirs, files in os.walk(image_dir):
     for file in files:
         if file.endswith("png") or file.endswith("jpg"):
             path = os.path.join(root, file)
-            label = (
-                os.path.basename(root).replace(" ", "-").lower()
-            )  # os.path.dirname(path) == root
-            # print(label, path)
+            label = (os.path.basename(root).replace(" ", "-").lower())  # os.path.dirname(path) == root
             if not label in label_ids:
                 label_ids[label] = current_id
                 current_id += 1
             id_ = label_ids[label]
-            # print(label_ids)
-            # y_labels.append(label)  # some number of labels
-            # x_train.append(path)  # verify this image, turn into a NUMPY array
+
             pil_image = Image.open(path).convert("L")  # grayscale
             size = (550, 550)
             final_image = pil_image.resize(size, Image.ANTIALIAS)
@@ -42,8 +37,6 @@ for root, dirs, files in os.walk(image_dir):
                 roi = image_array[y : y + h, x : x + w]
                 x_train.append(roi)
                 y_labels.append(id_)
-# print(y_labels)
-# print(x_train)
 
 with open("labels.pickle", "wb") as f:
     pickle.dump(label_ids, f)
