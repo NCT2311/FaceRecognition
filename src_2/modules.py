@@ -47,12 +47,13 @@ class Mongo:
     # get response from DB
     def receiveResponse(self):
         response = False
-        for timeRemain in range(60):
+        for timeRemain in range(6):
             '''Query from DB to get response'''
-            response = turns.find_one({}, {id: 0})['Response']
+            response = flag.find_one({})['Response']
             if (response):
-                return '''Door open'''
-            sleep(5)
+                print('day roi')
+                # return '''Door open'''
+            sleep(1)
         return '''Door still lock'''
 
     def updateFlag(self):
@@ -63,7 +64,6 @@ class Mongo:
     def clearTurn(self):
         turns.delete_many({})
         return 'delete all turns'
-
 ###########################################################################################################
 class Control:
     def addPerson(self, Fname, Lname, status=True):
