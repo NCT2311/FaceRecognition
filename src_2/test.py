@@ -76,12 +76,11 @@ person_name1, person_name2 = "", ""
 make_720p()
 
 n = 50
-run = True
 
-# 'src_2\data\congthanh\0.jpg'
-# img = cv2.imread("src_2\data\congthanh\0.jpg")
+# 'data/{0}/{1}.jpg'.format('congthanh', 1) 
+# img = cv2.imread('data/{0}/{1}.jpg'.format('61a4ededdd2f672c6d602ef6', 1) , cv2.IMREAD_COLOR)
 # cv2.imshow("img", img)
-# sleep(5)
+# cv2.waitKey(0)
 
 def person1(name):
     Path = ".\\data\\{}".format(name)
@@ -119,33 +118,40 @@ def person1(name):
 
 def person2(name):
     for index in range(n):
-        img = cv2.imread(".\\images\\{}\\{}.jpg".format(name, index), cv2.IMREAD_COLOR)
+        img = cv2.imread('data/{0}/{1}.jpg'.format(name, index) , cv2.IMREAD_COLOR)
         frame = img
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         # Cascade face_cascade
         faces = face_cascade.detectMultiScale(gray, scaleFactor=1.5, minNeighbors=5)
-        for (x, y, w, h) in faces:    
+        for (x, y, w, h) in faces:
+            # print(x, y, w, h)
             roi_gray = gray[y : y + h, x : x + w]  # (y_coordinate_start, y_coordinate_end)
             roi_color = frame[y : y + h, x : x + w]
+            # Recognize: Deep learned model predict keras tensorflow pytorch scikit learn
             id_, conf = recognizer.predict(roi_gray)
-            if conf >= 45:
-                temp_id = id_
-                person_name2 = labels[id_]
-                # if person_name2 != '':
-                #     return person_name2
-                font = cv2.FONT_HERSHEY_SIMPLEX
-                name = labels[id_]
-                color = (255, 255, 255)
-                stroke = 2
-                cv2.putText(frame, name, (x, y), font, 1, color, stroke, cv2.LINE_AA)
+            # if conf >= 45:
+            #     font = cv2.FONT_HERSHEY_SIMPLEX
+            #     name = labels[id_]
+            #     # if person_name1 != '':
+            #     #     return person_name1
+            #     color = (255, 255, 255)
+            #     stroke = 2
+            #     cv2.putText(frame, name, (x, y), font, 1, color, stroke, cv2.LINE_AA)
+
+            # Draw a Rectangle
             color = (255, 0, 0)  # BGR 0 - 255
             stroke = 2
             end_cord_x = x + w  # Width of Rectangle
             end_cord_y = y + h  # Height of Recctangle
             cv2.rectangle(frame, (x, y), (end_cord_x, end_cord_y), color, stroke)
-        cv2.imshow("img", img)
+
+        # Display the resulting frame
+        cv2.imshow("frame", frame)
+        #cv2.waitKey(0)
+
     return 'cannot found'
-person2('congthanh')
+
+person2('61a4ededdd2f672c6d602ef6')
 
 def iterativeDataSet(name):
     '''compare name with another'''
@@ -155,8 +161,6 @@ def iterativeDataSet(name):
         childPath = ".\\data\\{}".format(folderName)
         for filename in os.listdir(childPath):
             person1(str(filename))
-        # print(os.path.join(directory, filename))
-    # img = cv2.imread(".\\images\\{}\\*.jpg".format(name, index), cv2.IMREAD_COLOR)
 
 # iterativeDataSet('congthanh')
 
