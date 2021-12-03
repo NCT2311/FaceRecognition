@@ -93,17 +93,17 @@ class Control:
         }
         persons.insert_one(newPerson)
 
-    def addTurn(self, urlimg, Status, Personid, __v, Response=False):
+    def addTurn(self, Personid, __v, Fname, Lname, Status=True, Response=False):
         timeEvent = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        newPost = {
-            "urlimg": urlimg,
+        newTurn = {
+            "urlimg": self.getImageUrl(),
             "Status": Status,
             "Personid": Personid,
             "createAt": timeEvent,
             "__v": __v,
             "Response": Response,
         }
-        turns.insert_one(newPost)
+        turns.insert_one(newTurn)
 
     # get imgUrl
     def getImageUrl(self):

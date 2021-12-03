@@ -67,8 +67,8 @@ while True:
                 # break
             if count_relative == 0:
                 print("Successfully")
-                # flag = 1
-                # break
+                flag = 1
+                break
 
         # Draw a Rectangle
         color = (255, 0, 0)  # BGR 0 - 255
@@ -92,7 +92,8 @@ while True:
         print(img_item)
         cv2.imwrite(img_item, frame)
         # # Insert turn of nguoi quen
-        # Fname, Lname = Mongo.getNameById("", person_name)
+        Fname, Lname = Mongo.getNameById("", person_name)
+        print(Fname, Lname)
         # Control.addTurn("", person_name, 0, Fname, Lname, Status=True, Response=False)
         # sendMail("http://localhost:3000/home")
         break

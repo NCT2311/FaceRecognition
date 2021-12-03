@@ -11,7 +11,7 @@ import time
 def newPerson():
     Fname = str(input("Type your first name: "))
     Lname = str(input("Type your last name: "))
-    Control.addPerson(Fname, Lname, True)
+    Control.addPerson("", Fname, Lname, True)
     id = persons.find().sort("_id", pymongo.DESCENDING).limit(1)[0]["_id"]
     # creater new directory in user_capture
     os.makedirs("./images/" + str(id))
