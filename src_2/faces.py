@@ -1,8 +1,7 @@
 import numpy as np
 import cv2
 import pickle
-from main import *
-from mail_sending import *
+from modules import *
 
 face_cascade = cv2.CascadeClassifier("./cascades/data/haarcascade_frontalface_alt2.xml")
 eye_cascade = cv2.CascadeClassifier("cascades/data/haarcascade_eye.xml")
