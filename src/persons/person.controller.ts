@@ -9,7 +9,7 @@ export class PersonController {
   constructor(private readonly personService: PersonService , private readonly turnService: TurnService) {}
 
     @Get()
-    @Render('intro/index')
+    @Render('new')
     async index() {
       // var person = await this.personService.getPersons();
       // var a = person;

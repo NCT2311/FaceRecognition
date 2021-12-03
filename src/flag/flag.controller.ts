@@ -9,7 +9,7 @@ export class FlagController {
 
     @Get()
     @UseGuards(AuthGuard('jwt'))
-    @Render('intro/index')
+    @Render('new')
     async index() {
 
 

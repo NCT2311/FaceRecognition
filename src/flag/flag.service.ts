@@ -11,9 +11,10 @@ export class FlagService {
     @InjectModel('Flags') private readonly FlagModel: Model<Flag>,
   ) {}
 
-  async insertFlag( Flagcheck: Boolean) {
+  async insertFlag( Flagcheck: Boolean , Response: Boolean) {
     const newFlag = new this.FlagModel({
-        Flagcheck
+        Flagcheck,
+        Response
     });
     const result = await newFlag.save();
     return result.id as string;
@@ -22,6 +23,7 @@ export class FlagService {
   async editFlag(
       id:string,
       Flagcheck: Boolean,
+      Response: Boolean
   ) {
     const update =await this.FlagModel.findById(id);
     update.Flagcheck = Flagcheck;
@@ -42,6 +44,7 @@ export class FlagService {
     //console.log(result);
     return Flags.map((prod) => ({
       Flagcheck: prod.Flagcheck,
+      Response: prod.Response,
       id: prod.id,
     }));
   }

@@ -8,6 +8,8 @@ import { TurnModule } from './turns/turn.module';
 import { FlagModule } from './flag/flag.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { UnauthorizedExceptionFilter } from './filters/unauthorized-exception.filter';
+import { APP_FILTER } from '@nestjs/core';
 
 
 
@@ -15,6 +17,9 @@ import { AuthModule } from './auth/auth.module';
   imports: [MongooseModule.forRoot('mongodb+srv://hda1010:duyanh123@cluster0.ukowb.mongodb.net/facerecognition?retryWrites=true&w=majority'),
   PersonModule,TurnModule,FlagModule,UserModule,AuthModule],
   controllers: [AppController],  
-  providers: [AppService],
+  providers: [AppService ,{
+    provide: APP_FILTER,
+    useClass: UnauthorizedExceptionFilter
+  },],
 })
 export class AppModule {}
