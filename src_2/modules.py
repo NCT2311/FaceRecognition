@@ -1,12 +1,10 @@
-'''
-    THIS MODULE IS USED TO CONNECT TO DB via MongoDB
-'''
 from pymongo import MongoClient
 import os, glob
 from time import sleep
 import smtplib, ssl
 from email.mime.text import MIMEText
 from datetime import datetime
+
 '''
 Using Mongodb to store Data:
 My DB named "DoorLock" has two Collections:
@@ -16,6 +14,7 @@ My DB named "DoorLock" has two Collections:
     + Users:
 CONNECTING STRING FORM: "mongodb+srv://<USER>:<PASSWORD>@<CLUSTER>/<user>?ssl=true&ssl_cert_reqs=CERT_NONE"
 '''
+
 cluster = MongoClient("mongodb+srv://hda1010:duyanh123@cluster0.ukowb.mongodb.net/facerecognition?retryWrites=true&w=majority")
 # go to database
 db = cluster["facerecognition"]
@@ -133,7 +132,7 @@ def sendMail(link, Fname = 'Undefined', Lname = 'Undefined'):
 
     print("sent email!")
 
-# sendMail('https://localhost:3000', id = None, Fname = 'ndvu', Lname = '')
+# sendMail('https://localhost:3000', Fname = 'ndvu', Lname = '')
 
 ###########################################################################################################
 '''
