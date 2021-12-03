@@ -2,6 +2,7 @@ import numpy as np
 import cv2
 import pickle
 from modules import *
+import pymongo
 
 face_cascade = cv2.CascadeClassifier("./cascades/data/haarcascade_frontalface_alt2.xml")
 eye_cascade = cv2.CascadeClassifier("cascades/data/haarcascade_eye.xml")
@@ -100,11 +101,12 @@ while True:
         break
     if flag == 2:
         # # Nguoi laa
-        # print("Who are you??")
-        # imgUrl = Control.getImageUrl("")
-        # Mongo.updateFlag("")
-        # Control.addPerson("", "undefined", "undefined", False)
-        # Control.addTurn("", imgUrl, person_name, 0, False, False)
+        print("Who are you??")
+        imgUrl = Control.getImageUrl("")
+        Mongo.updateFlag("")
+        Control.addPerson("", "undefined", "undefined", False)
+        id = persons.find().sort("_id", pymongo.DESCENDING).limit(1)[0]["_id"]
+        Control.addTurn("", imgUrl, id, 0, False, False)
         break
     if cv2.waitKey(20) & 0xFF == ord("q"):
         break
