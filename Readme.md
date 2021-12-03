@@ -40,3 +40,6 @@ status: Người lạ/quen (True: quen/ fa
 -   Push data lên server
 -   2/11: Quét mặt (5s đứng yên mới quét), screen shot vào folder response
 -   6/11: Quét vừa người quen, vừa người lạ thì tùy mình quyết định mở hay không? Vẫn gửi request như người lạ, nhưng giờ gửi nhiều thông tin người hơn
+-   Gửi mail thì gửi luôn thông tin + Đường link web
+    pip install pymongo
+    pip install "pymongo[srv]"
