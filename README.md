@@ -43,3 +43,9 @@ status: Người lạ/quen (True: quen/ fa
 - Gửi mail thì gửi luôn thông tin + Đường link web
   pip install pymongo
   pip install "pymongo[srv]"
+
+  - Thống kê: Vũ đang làm
+  - Bắt mặt chính xác hơn
+  - Xử lý case vừa lạ vừa quen => Cho vào + Gửi turn
+  - Người lạ => Gửi turn + Person
+  - 1 quen, nhiều quen, 1 lạ, nhiều lạ, quen với lạ
