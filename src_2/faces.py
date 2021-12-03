@@ -97,7 +97,7 @@ while True:
         # sendMail("http://localhost:3000/home")
         break
     if flag == 2:
-        # Nguoi la
+        # Nguoi laa
         print("Who are you??")
         break
     if cv2.waitKey(20) & 0xFF == ord("q"):
