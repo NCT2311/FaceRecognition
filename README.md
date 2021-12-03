@@ -55,4 +55,4 @@ status: Người lạ/quen (True: quen/ fa
   - [DONE] Bắt mặt chính xác hơn
   - Xử lý case vừa lạ vừa quen => Cho vào + Gửi turn
   - Người lạ => Gửi turn + Person
-  - 1 quen, nhiều quen, 1 lạ, nhiều lạ, quen với lạ
+  - 1 quen, nhiều quen, 1 lạ, nhiều lạ, quen với lạa
