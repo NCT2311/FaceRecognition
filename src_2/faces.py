@@ -23,7 +23,8 @@ def make_720p():
     cap.set(4, 720)
 
 
-count = 50
+count_stranger = 100
+count_relative = 50
 temp_id = 0
 flag = 0
 person_name = ""
@@ -41,30 +42,33 @@ while True:
         roi_color = frame[y : y + h, x : x + w]
         # Recognize: Deep learned model predict keras tensorflow pytorch scikit learn
         id_, conf = recognizer.predict(roi_gray)
-        if conf >= 45:  # and conf <= 85:
-            print(id_)
-            # print(labels[id_])
+        if conf >= 45 and conf <= 85:
+            # print(id_)
+            print(labels[id_])
 
+            # count_relative to recognize
             if temp_id != id_:
-                count = 50
+                count_relative = 50
             temp_id = id_
             person_name = labels[id_]
-            count = count - 1
+            count_relative = count_relative - 1
 
-            # if temp_id == id_:
-            #     count = count - 1
-            # temp_id = id_
-            # person_name = labels[id_]
-
-            if count == 0:
-                flag = 1
-                break
-
+            # Write person's name
             font = cv2.FONT_HERSHEY_SIMPLEX
             name = labels[id_]
             color = (255, 255, 255)
             stroke = 2
             cv2.putText(frame, name, (x, y), font, 1, color, stroke, cv2.LINE_AA)
+
+            count_stranger = count_stranger - 1
+            if count_stranger == 0:
+                print("Who are you??")
+                # flag = 2
+                # break
+            if count_relative == 0:
+                print("Successfully")
+                # flag = 1
+                # break
 
         # Draw a Rectangle
         color = (255, 0, 0)  # BGR 0 - 255
@@ -87,9 +91,14 @@ while True:
         )
         print(img_item)
         cv2.imwrite(img_item, frame)
-        collection = Excute()
-        collection.addTurn(getImageUrl(), False, person_name, 0, True)
-        sendMail("http://localhost:3000/home")
+        # # Insert turn of nguoi quen
+        # Fname, Lname = Mongo.getNameById("", person_name)
+        # Control.addTurn("", person_name, 0, Fname, Lname, Status=True, Response=False)
+        # sendMail("http://localhost:3000/home")
+        break
+    if flag == 2:
+        # Nguoi la
+        print("Who are you??")
         break
     if cv2.waitKey(20) & 0xFF == ord("q"):
         break
