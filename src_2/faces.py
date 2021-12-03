@@ -93,8 +93,9 @@ while True:
         cv2.imwrite(img_item, frame)
         # # Insert turn of nguoi quen
         Fname, Lname = Mongo.getNameById("", person_name)
-        print(Fname, Lname)
-        # Control.addTurn("", person_name, 0, Fname, Lname, Status=True, Response=False)
+        imgUrl = Control.getImageUrl("")
+        print(imgUrl)
+        Control.addTurn("", imgUrl, person_name, 0, True, True)
         # sendMail("http://localhost:3000/home")
         break
     if flag == 2:

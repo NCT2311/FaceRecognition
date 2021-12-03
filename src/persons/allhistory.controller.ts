@@ -17,7 +17,7 @@ export class AllhistoryController {
   constructor(
     private readonly personService: PersonService,
     private readonly turnService: TurnService,
-  ) {}
+  ) { }
 
   @Get()
   @UseGuards(AuthGuard('jwt'))
@@ -27,7 +27,7 @@ export class AllhistoryController {
     var people = await this.personService.getPersons();
     for (var i = 0; i < list.length; i++) {
       for (var j = 0; j < people.length; j++) {
-          if (!list[i].Response ) list[i].Response = false;
+        if (!list[i].Response) list[i].Response = false;
         if (list[i].Personid.toString() == people[j].id) {
           if (people[j].Fname == "" && people[j].Lname == "") {
             people[j].Fname = 'Unidentified';

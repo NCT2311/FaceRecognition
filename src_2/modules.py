@@ -60,7 +60,7 @@ class Mongo:
 
     def updateFlag(self):
         f = flag.find_one()
-        newFlag = {"$set": {"Flagcheck": False}}
+        newFlag = {"$set": {"Flagcheck": True}}
         flag.update_one(f, newFlag)
 
     def clearTurn(self):
@@ -93,10 +93,10 @@ class Control:
         }
         persons.insert_one(newPerson)
 
-    def addTurn(self, Personid, __v, Fname, Lname, Status=True, Response=False):
+    def addTurn(self, imgUrl, Personid, __v, Status=True, Response=False):
         timeEvent = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         newTurn = {
-            "urlimg": self.getImageUrl(),
+            "urlimg": imgUrl,
             "Status": Status,
             "Personid": Personid,
             "createAt": timeEvent,
@@ -109,7 +109,7 @@ class Control:
     def getImageUrl(self):
         files = glob.glob("..\public\img\*.png")
         imgName = max(files, key=os.path.getctime)
-        imgUrl = "../img/" + imgName[14::]
+        imgUrl = "../public/img/" + imgName[14::]
         return str(imgUrl)
 
 

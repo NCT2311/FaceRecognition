@@ -56,3 +56,8 @@ status: Người lạ/quen (True: quen/ fa
   - Xử lý case vừa lạ vừa quen => Cho vào + Gửi turn
   - Người lạ => Gửi turn + Person
   - 1 quen, nhiều quen, 1 lạ, nhiều lạ, quen với lạa
+
+Trong turn
+
+- Status: True/False => Quen/Lạ
+- Response: Accept/Decline
