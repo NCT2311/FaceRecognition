@@ -27,12 +27,14 @@ export class FlagService {
   ) {
     const update =await this.FlagModel.findById(id);
     update.Flagcheck = Flagcheck;
+    update.Response = Response;
     update.save();
   }
   async getSingFlag(FlagId: string){
     const result = await this.FlagModel.findById(FlagId);
     return {
       Flagcheck: result.Flagcheck,
+      Response: result.Response,
       id: result.id,
     }
   }

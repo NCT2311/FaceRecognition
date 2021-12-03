@@ -34,6 +34,7 @@ export class TurnController {
   async getinfo(@Body('id') id: string) { 
     // console.log(id);
     let person = await this.personService.getSingPerson(id);
+    // console.log(person);
     person.updateAt = new Date();
     await this.personService.editPerson(id,person.Fname,person.Lname,person.Status,person.updateAt);
     return{
