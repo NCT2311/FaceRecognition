@@ -4,6 +4,10 @@
     - OpenCV for python: https://www.geeksforgeeks.org/how-to-install-opencv-for-python-in-windows/
     - OpenCV version 4.5.3; Python version 3.9.7
 
+- Mongodb
+  pip install pymongo
+  pip install "pymongo[srv]"
+
 [How-to-setup-package]
 
 1. Copy Haar Cascades:
@@ -36,16 +40,19 @@ status: Người lạ/quen (True: quen/ fa
 
 [Requirements]
 
-- Setup khuôn mặt lần đầu tiên của admin => Được rồi nhưng nó phải chậm lại để bắt nhiều góc
-- Push data lên server
-- 2/11: Quét mặt (5s đứng yên mới quét), screen shot vào folder response
+- [DONE] Setup khuôn mặt lần đầu tiên của admin => Được rồi nhưng nó phải chậm lại để bắt nhiều góc
+- [DONE] Push data lên server
+- [DONE] 2/11: Quét mặt (5s đứng yên mới quét), screen shot vào folder response
+  => Done
+  Có 3 cách:
+  C1: Nhấn nút thì chụp hình lúc đó => Phi thực tế
+  C2: Delay trong while => Khung hình bị khựng lại, không quét được liên tục
+  C3: Cho count_shot rồi khoảng 2 giây nó tự chụp 1 lần, chuyển động chậm là được
 - 6/11: Quét vừa người quen, vừa người lạ thì tùy mình quyết định mở hay không? Vẫn gửi request như người lạ, nhưng giờ gửi nhiều thông tin người hơn
 - Gửi mail thì gửi luôn thông tin + Đường link web
-  pip install pymongo
-  pip install "pymongo[srv]"
 
   - Thống kê: Vũ đang làm
-  - Bắt mặt chính xác hơn
+  - [DONE] Bắt mặt chính xác hơn
   - Xử lý case vừa lạ vừa quen => Cho vào + Gửi turn
   - Người lạ => Gửi turn + Person
   - 1 quen, nhiều quen, 1 lạ, nhiều lạ, quen với lạ
