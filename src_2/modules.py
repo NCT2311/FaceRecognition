@@ -109,7 +109,7 @@ class Control:
     def getImageUrl(self):
         files = glob.glob("..\public\img\*.png")
         imgName = max(files, key=os.path.getctime)
-        imgUrl = "../public/img/" + imgName[14::]
+        imgUrl = "../img/" + imgName[14::]
         return str(imgUrl)
 
 

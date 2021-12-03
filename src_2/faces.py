@@ -54,17 +54,17 @@ while True:
             count_relative = count_relative - 1
 
             # Write person's name
-            font = cv2.FONT_HERSHEY_SIMPLEX
-            name = labels[id_]
-            color = (255, 255, 255)
-            stroke = 2
-            cv2.putText(frame, name, (x, y), font, 1, color, stroke, cv2.LINE_AA)
+            # font = cv2.FONT_HERSHEY_SIMPLEX
+            # name = labels[id_]
+            # color = (255, 255, 255)
+            # stroke = 2
+            # cv2.putText(frame, name, (x, y), font, 1, color, stroke, cv2.LINE_AA)
 
             count_stranger = count_stranger - 1
             if count_stranger == 0:
                 print("Who are you??")
-                # flag = 2
-                # break
+                flag = 2
+                break
             if count_relative == 0:
                 print("Successfully")
                 flag = 1
@@ -99,8 +99,12 @@ while True:
         # sendMail("http://localhost:3000/home")
         break
     if flag == 2:
-        # Nguoi laa
-        print("Who are you??")
+        # # Nguoi laa
+        # print("Who are you??")
+        # imgUrl = Control.getImageUrl("")
+        # Mongo.updateFlag("")
+        # Control.addPerson("", "undefined", "undefined", False)
+        # Control.addTurn("", imgUrl, person_name, 0, False, False)
         break
     if cv2.waitKey(20) & 0xFF == ord("q"):
         break
