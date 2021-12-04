@@ -47,7 +47,7 @@ def storeUserImage():
         #     count += 1
 
         # Press 'q' to exit
-        if key == ord("q") or count == 20:
+        if key == ord("q") or count == 30:
             break
     print("added!")
     # Release memory
