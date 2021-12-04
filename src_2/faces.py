@@ -90,18 +90,23 @@ while True:
             + str(datetime.now().strftime("%Y%m%d%H%M%S"))
             + ".png"
         )
-        print(img_item)
         cv2.imwrite(img_item, frame)
         # # Insert turn of nguoi quen
         Fname, Lname = Mongo.getNameById("", person_name)
         imgUrl = Control.getImageUrl("")
-        print(imgUrl)
         Control.addTurn("", imgUrl, person_name, 0, True, True)
         # sendMail("http://localhost:3000/home")
         break
     if flag == 2:
         # # Nguoi laa
         print("Who are you??")
+        img_item = (
+            "../public/img/"
+            + person_name
+            + str(datetime.now().strftime("%Y%m%d%H%M%S"))
+            + ".png"
+        )
+        cv2.imwrite(img_item, frame)
         imgUrl = Control.getImageUrl("")
         Mongo.updateFlag("")
         Control.addPerson("", "undefined", "undefined", False)
