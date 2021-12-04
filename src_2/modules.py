@@ -1,10 +1,11 @@
+from typing import Counter
 from pymongo import MongoClient
 import os, glob
 from time import sleep
 import smtplib, ssl
 from email.mime.text import MIMEText
 from datetime import datetime
-
+import threading
 '''
 Using Mongodb to store Data:
 My DB named "DoorLock" has two Collections:
@@ -134,4 +135,22 @@ def sendMail(link, Fname = 'Undefined', Lname = 'Undefined'):
     print("sent email!")
 
 # sendMail('https://localhost:3000', Fname = 'ndvu', Lname = '')
+
+timerCounter, response = 300, False
+###########################################################################################################
+def getResponse():
+    global timerCounter, response
+    response = flag.find_one({})['Response']
+    if (response == True):
+        print("door opened")
+        timerCounter = 300
+        return
+    elif (timerCounter < 0):
+        print("door closed")
+        timerCounter = 300
+        return
+    else:
+        timerCounter -= 1
+    threading.Timer(1, getResponse).start()
+
 
