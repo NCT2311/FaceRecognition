@@ -26,7 +26,7 @@ block content
                   .col-md-6
                     .card.tale-bg
                       img(id='imagecheck'  alt='people')
-                  .col-md-6
+                  .col-md-6(class="css")
                     .row.row-content
                       h2 First name:
                       h2.h2-data(id='firstname')
@@ -38,9 +38,9 @@ block content
                       h2.h2-data(id='timeaccess')
                     .row.row-content1
                       button.btn.btn-primary(type='button',id='buttoncheck') 
-                        h1 Confirm
+                        h2(class="cc") Confirm
                       button.btn.btn-danger(type='button',id='buttoncheck1')
-                        h1 Refuse
+                        h2(class="cc") Refuse
                       #confirmPersonModal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='confirmPersonModal' aria-hidden='true')
                           .modal-dialog(role='document')
                               .modal-content.bg-primary

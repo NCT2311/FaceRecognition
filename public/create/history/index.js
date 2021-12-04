@@ -14,6 +14,8 @@ function fireSweetAlert() {
         'success'
     )
 }
+
+
 $(".btn-search").click(function (e) {
     var id = $(this).data("id");
     var lastName = $(this).data("lname");

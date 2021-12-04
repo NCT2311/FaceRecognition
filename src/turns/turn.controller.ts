@@ -34,6 +34,7 @@ export class TurnController {
   async getinfo(@Body('id') id: string) { 
     // console.log(id);
     let person = await this.personService.getSingPerson(id);
+    // console.log(person);
     person.updateAt = new Date();
     await this.personService.editPerson(id,person.Fname,person.Lname,person.Status,person.updateAt);
     return{
@@ -48,7 +49,7 @@ export class TurnController {
     var list =  await this.turnService.getTurns();
     var index = list.length;
     var index1 = listflag.length;
-    await this.FlagService.editFlag(listflag[index1-1].id , false );
+    await this.FlagService.editFlag(listflag[index1-1].id , false , true );
     await this.turnService.editTurn(list[index-1].id, list[index-1].urlimg, list[index-1].Status, true); 
     res.redirect('/admin');
   }
@@ -60,7 +61,7 @@ export class TurnController {
     var list =  await this.turnService.getTurns();
     var index = list.length;
     var index1 = listflag.length;
-    await this.FlagService.editFlag(listflag[index1-1].id , false );
+    await this.FlagService.editFlag(listflag[index1-1].id , false , false );
     await this.turnService.editTurn(list[index-1].id, list[index-1].urlimg, list[index-1].Status, false);
     res.redirect('/admin');
   }
