@@ -53,11 +53,17 @@ status: Người lạ/quen (True: quen/ fa
 
   - Thống kê: Vũ đang làm
   - [DONE] Bắt mặt chính xác hơn
+
   - Xử lý case vừa lạ vừa quen => Cho vào + Gửi turn
   - Người lạ => Gửi turn + Person
   - 1 quen, nhiều quen, 1 lạ, nhiều lạ, quen với lạa
 
-Trong turn
+- [TASKS] => Nhận diện 1 mặt mà k phải người quen thì in ra unknown
+  => Quét nhiều mặt ...
+  BUG: Algorithms quét 1 mặt là xác định 1 id không đổi trong 3s thì xuất ouput nhưng nhiều mặt thì dù quen hay lạ id nó cũng sẽ nhảy xen kẽ liên tục => ? Bắt như thế nào
+- [IDEA] Quét nhiều mặt 1 lúc
+  => Xài 1 mảng lấy hết id ra, quét trong vòng 5-10s nếu count 1 tên trong người nhà = 100
+  Trong turn
 
 - Status: True/False => Quen/Lạ
 - Response: Accept/Decline

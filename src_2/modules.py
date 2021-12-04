@@ -157,6 +157,10 @@ def sendMail(link, Fname="Undefined", Lname="Undefined"):
     print("sent email!")
 
 
+# Clear All Turn
+mg = Mongo()
+mg.clearTurn()
+
 # sendMail('https://localhost:3000', Fname = 'ndvu', Lname = '')
 
 ###########################################################################################################

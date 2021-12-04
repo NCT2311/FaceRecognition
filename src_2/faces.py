@@ -43,7 +43,7 @@ while True:
         roi_color = frame[y : y + h, x : x + w]
         # Recognize: Deep learned model predict keras tensorflow pytorch scikit learn
         id_, conf = recognizer.predict(roi_gray)
-        if conf >= 45:  # and conf <= 85:
+        if conf >= 45 and conf <= 85:
             # print(id_)
             print(labels[id_])
 
@@ -54,7 +54,7 @@ while True:
             person_name = labels[id_]
             count_relative = count_relative - 1
 
-            # Write person's name
+            # # Write person's name
             font = cv2.FONT_HERSHEY_SIMPLEX
             name = labels[id_]
             color = (255, 255, 255)
@@ -64,13 +64,21 @@ while True:
             count_stranger = count_stranger - 1
             if count_stranger == 0:
                 print("Who are you??")
+                count_stranger = 100
                 # flag = 2
-                # break
+                break
             if count_relative == 0:
                 print("Successfully")
+                count_stranger = 100
+                count_relative = 30
                 # flag = 1
-                # break
-
+                break
+        else:
+            font = cv2.FONT_HERSHEY_SIMPLEX
+            name = "Unknown"
+            color = (255, 255, 255)
+            stroke = 2
+            cv2.putText(frame, name, (x, y), font, 1, color, stroke, cv2.LINE_AA)
         # # Draw a Rectangle
         color = (255, 0, 0)  # BGR 0 - 255
         stroke = 2
@@ -81,8 +89,8 @@ while True:
     # Display the resulting frame
     cv2.imshow("frame", frame)
     if flag == 1:
-        print("Successfully")
-        print(person_name)
+        flag = 0
+        # print(person_name)
         # Create last photo into folder
         img_item = (
             "../public/img/"
@@ -96,10 +104,10 @@ while True:
         imgUrl = Control.getImageUrl("")
         Control.addTurn("", imgUrl, person_name, 0, True, True)
         # sendMail("http://localhost:3000/home")
-        break
+        # break
     if flag == 2:
         # # Nguoi laa
-        print("Who are you??")
+        flag = 0
         img_item = (
             "../public/img/"
             + person_name
@@ -112,7 +120,7 @@ while True:
         Control.addPerson("", "undefined", "undefined", False)
         id = persons.find().sort("_id", pymongo.DESCENDING).limit(1)[0]["_id"]
         Control.addTurn("", imgUrl, id, 0, False, False)
-        break
+        # break
     if cv2.waitKey(20) & 0xFF == ord("q"):
         break
 
