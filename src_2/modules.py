@@ -46,7 +46,7 @@ class Mongo:
     # get response from DB
     def receiveResponse(self):
         response = False
-        for timeRemain in range(6):
+        for timeRemain in range(300):
             '''Query from DB to get response'''
             response = flag.find_one({})['Response']
             if (response):
@@ -56,7 +56,7 @@ class Mongo:
 
     def updateFlag(self):
         f = flag.find_one()
-        newFlag = {"$set":{"Flagcheck": False}}
+        newFlag = {"$set":{"Flagcheck": True}}
         flag.update_one(f, newFlag)
 
     def clearTurn(self):
@@ -69,14 +69,11 @@ class Mongo:
             if str(person['_id']) == id:
                 Fname, Lname = person['Fname'], person['Lname']
         return Fname, Lname
-
 ###########################################################################################################
 class Control:
     def addPerson(self, Fname, Lname, status=True):
         id = persons.count_documents({})
-        createAt, updateAt = datetime.now().strftime(
-            "%Y-%m-%d %H:%M:%S"
-        ), datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        createAt, updateAt = datetime.now().strftime("%Y-%m-%d %H:%M:%S"), datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         newPerson = {
             "id": id,
             "Fname": Fname,
@@ -88,10 +85,17 @@ class Control:
         }
         persons.insert_one(newPerson)
 
-    def addTurn(self, urlimg, Status, Personid, __v, Response = False):
+    def addTurn(self, imgUrl, Personid, __v, Status = True, Response = False):
         timeEvent = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        newPost = {"urlimg": urlimg, "Status": Status, "Personid": Personid, "createAt": timeEvent, "__v": __v, "Response": Response}
-        turns.insert_one(newPost)
+        newTurn = {
+            "urlimg": imgUrl, 
+            "Status": Status, 
+            "Personid": Personid, 
+            "createAt": timeEvent, 
+            "__v": __v, 
+            "Response": Response
+        }
+        turns.insert_one(newTurn)
 
     # get imgUrl
     def getImageUrl(self):
@@ -108,19 +112,16 @@ class Control:
 '''
 def sendMail(link, Fname = 'Undefined', Lname = 'Undefined'):
     port = 465
-
-    time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
     sender = 'doorlock.bot@gmail.com'
     password = 'datkll211'
 
     '''Type your email'''
     recieve = 'duyvu1109@gmail.com'
 
+    time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     submsg = '''\
         <h2>{0} came home at {1} </h2>.
     '''.format(Fname + Lname, time)
-
     msg = MIMEText(submsg + u'Someone is coming, <a href={0}>click here</a> for more infomation'.format(link),'html')
 
     context = ssl.create_default_context()
@@ -134,7 +135,3 @@ def sendMail(link, Fname = 'Undefined', Lname = 'Undefined'):
 
 # sendMail('https://localhost:3000', Fname = 'ndvu', Lname = '')
 
-###########################################################################################################
-'''
-    Another modules
-'''

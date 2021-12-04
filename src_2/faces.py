@@ -1,6 +1,8 @@
+import numpy as np
 import cv2
 import pickle
-
+from modules import *
+import pymongo
 face_cascade = cv2.CascadeClassifier("./cascades/data/haarcascade_frontalface_alt2.xml")
 eye_cascade = cv2.CascadeClassifier("cascades/data/haarcascade_eye.xml")
 smile_cascade = cv2.CascadeClassifier("cascades/data/haarcascade_smile.xml")
@@ -20,12 +22,14 @@ def make_720p():
     cap.set(3, 1280)
     cap.set(4, 720)
 
-count = 100
+
+count_stranger = 100
+count_relative = 50
 temp_id = 0
 flag = 0
 person_name = ""
-make_720p()
 
+make_720p()
 while True:
     # Capture frame-by-frame
     ret, frame = cap.read()
@@ -38,22 +42,33 @@ while True:
         roi_color = frame[y : y + h, x : x + w]
         # Recognize: Deep learned model predict keras tensorflow pytorch scikit learn
         id_, conf = recognizer.predict(roi_gray)
-        if conf >= 45:
+        if conf >= 45 and conf <= 85:
+            # print(id_)
+            print(labels[id_])
+
+            # count_relative to recognize
             if temp_id != id_:
-                count = 100
+                count_relative = 50
             temp_id = id_
             person_name = labels[id_]
-            count = count - 1
+            count_relative = count_relative - 1
 
-            if count == 0:
-                flag = 1
-                break
-            
+            # Write person's name
             font = cv2.FONT_HERSHEY_SIMPLEX
             name = labels[id_]
             color = (255, 255, 255)
             stroke = 2
             cv2.putText(frame, name, (x, y), font, 1, color, stroke, cv2.LINE_AA)
+
+            count_stranger = count_stranger - 1
+            if count_stranger == 0:
+                print("Who are you??")
+                flag = 2
+                break
+            if count_relative == 0:
+                print("Successfully")
+                flag = 1
+                break
 
         # Draw a Rectangle
         color = (255, 0, 0)  # BGR 0 - 255
@@ -64,10 +79,42 @@ while True:
 
     # Display the resulting frame
     cv2.imshow("frame", frame)
-
     if flag == 1:
         print("Successfully")
         print(person_name)
+        # Create last photo into folder
+        img_item = (
+            "../public/img/"
+            + person_name
+            + str(datetime.now().strftime("%Y%m%d%H%M%S"))
+            + ".png"
+        )
+        print(img_item)
+        cv2.imwrite(img_item, frame)
+        # # Insert turn of nguoi quen
+        Fname, Lname = Mongo.getNameById("", person_name)
+        print(Fname, Lname)
+        Fname, Lname = Mongo.getNameById("", person_name)
+        imgUrl = Control.getImageUrl("")
+        Control.addTurn("", imgUrl, person_name, 0, Status = True, Response = True)
+        Mongo.updateFlag("")
+        break
+    if flag == 2:
+        # Nguoi laa
+        print("Who are you??")
+        Control.addPerson("", "undefined", "undefined", False)
+        id = persons.find().sort("_id", pymongo.DESCENDING).limit(1)[0]["_id"]
+        img_item = (
+            "../public/img/"
+            + str(id)
+            + str(datetime.now().strftime("%Y%m%d%H%M%S"))
+            + ".png"
+        )
+        cv2.imwrite(img_item, frame)
+        imgUrl = Control.getImageUrl("")
+        Control.addTurn("", imgUrl, id, 0, False, False)
+        Mongo.updateFlag("")
+        Mongo.receiveResponse("")
         break
     if cv2.waitKey(20) & 0xFF == ord("q"):
         break
