@@ -3,7 +3,6 @@ import os
 import numpy as np
 from PIL import Image
 import pickle
-from time import sleep
 
 def training():
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -48,11 +47,6 @@ def training():
 
     print('Traning done.')
 
-# training()
-###############################################################################################################
-###############################################################################################################
-###############################################################################################################
-
 face_cascade = cv2.CascadeClassifier("./cascades/data/haarcascade_frontalface_alt2.xml")
 
 recognizer = cv2.face.LBPHFaceRecognizer_create()
@@ -70,104 +64,58 @@ def make_720p():
     cap.set(3, 1280)
     cap.set(4, 720)
 
-temp_id = 0
-flag = 0
-person_name1, person_name2 = "", ""
 make_720p()
 
-n = 50
-
-# 'data/{0}/{1}.jpg'.format('congthanh', 1) 
-# img = cv2.imread('data/{0}/{1}.jpg'.format('61a4ededdd2f672c6d602ef6', 1) , cv2.IMREAD_COLOR)
-# cv2.imshow("img", img)
-# cv2.waitKey(0)
-
-def person1(name):
-    Path = ".\\data\\{}".format(name)
-    for filename in os.listdir(Path):
-        print(".\\data\\{}\\{}".format(name, filename))
-        img = cv2.imread(".\data\{}\{}".format(name, filename), cv2.IMREAD_COLOR)
-        frame = img
-        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        # Cascade face_cascade
-        faces = face_cascade.detectMultiScale(gray, scaleFactor=1.5, minNeighbors=5)
-        for (x, y, w, h) in faces:    
-            roi_gray = gray[y : y + h, x : x + w]  # (y_coordinate_start, y_coordinate_end)
-            roi_color = frame[y : y + h, x : x + w]
-            id_, conf = recognizer.predict(roi_gray)
-            if conf >= 45:
-                temp_id = id_
-                person_name1 = labels[id_]
-                # if person_name1 != '':
-                #     return person_name1
-                font = cv2.FONT_HERSHEY_SIMPLEX
-                name = labels[id_]
-                color = (255, 255, 255)
-                stroke = 2
-                cv2.putText(frame, name, (x, y), font, 1, color, stroke, cv2.LINE_AA)
-            color = (255, 0, 0)  # BGR 0 - 255
-            stroke = 2
-            end_cord_x = x + w  # Width of Rectangle
-            end_cord_y = y + h  # Height of Recctangle
-            cv2.rectangle(frame, (x, y), (end_cord_x, end_cord_y), color, stroke)
+def detect(name):
+    directory = ".\\data\\{}".format(name)
+    for filename in os.listdir(directory):
+        frame = cv2.imread(os.path.join(directory, filename), cv2.IMREAD_COLOR)
         cv2.imshow("frame", frame)
-        sleep(1)
-    return 'cannot found'
-
-# person1('congthanh')
-
-def person2(name):
-    for index in range(n):
-        img = cv2.imread('data/{0}/{1}.jpg'.format(name, index) , cv2.IMREAD_COLOR)
-        frame = img
+        cv2.waitKey(1)
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         # Cascade face_cascade
         faces = face_cascade.detectMultiScale(gray, scaleFactor=1.5, minNeighbors=5)
         for (x, y, w, h) in faces:
-            # print(x, y, w, h)
             roi_gray = gray[y : y + h, x : x + w]  # (y_coordinate_start, y_coordinate_end)
-            roi_color = frame[y : y + h, x : x + w]
-            # Recognize: Deep learned model predict keras tensorflow pytorch scikit learn
             id_, conf = recognizer.predict(roi_gray)
-            # if conf >= 45:
-            #     font = cv2.FONT_HERSHEY_SIMPLEX
-            #     name = labels[id_]
-            #     # if person_name1 != '':
-            #     #     return person_name1
-            #     color = (255, 255, 255)
-            #     stroke = 2
-            #     cv2.putText(frame, name, (x, y), font, 1, color, stroke, cv2.LINE_AA)
-
-            # Draw a Rectangle
-            color = (255, 0, 0)  # BGR 0 - 255
-            stroke = 2
-            end_cord_x = x + w  # Width of Rectangle
-            end_cord_y = y + h  # Height of Recctangle
-            cv2.rectangle(frame, (x, y), (end_cord_x, end_cord_y), color, stroke)
-
-        # Display the resulting frame
-        cv2.imshow("frame", frame)
-        #cv2.waitKey(0)
-
+            if conf >= 45:
+                name = labels[id_]
+                if name != '':
+                    return name
+        
     return 'cannot found'
-
-person2('61a4ededdd2f672c6d602ef6')
 
 def iterativeDataSet(name):
     '''compare name with another'''
-    # path = ".\\data\\{}".format(name)
+    count = 0
     folderPath = ".\\data"
     for folderName in os.listdir(folderPath):
-        childPath = ".\\data\\{}".format(folderName)
-        for filename in os.listdir(childPath):
-            person1(str(filename))
+        personName = detect(folderName)
+        print(personName)
+        if personName == name and personName == folderName:
+            count += 1
+        elif personName != name and personName != 'cannot found':
+            count += 1
+    print("Accurate: {:.0f}%".format(100*count/len(os.listdir(folderPath))))
 
-# iterativeDataSet('congthanh')
-
-# print("person1: {0}\nperson2: {1}\nResult: {2}".format(
-#     person1('61a4ededdd2f672c6d602ef6'), 
-#     person2('congthanh'),
-#     person1('61a4ededdd2f672c6d602ef6') != person2('congthanh')))
+# training()
+# print(detect('61aa3105223797e0e7ad043b'))
+iterativeDataSet('congthanh')
 
 cap.release()
 cv2.destroyAllWindows()
+
+'''Plotting'''
+
+def plot():  
+    import matplotlib.pyplot as plt
+    import numpy as np
+
+    x = np.array([0,1,2,3])
+    y = np.array([5,3,2,4])
+
+    plt.plot(x, y)
+    plt.xlabel('Number of images use for training/person')
+    plt.ylabel('Accurate')
+    plt.show()
+
