@@ -24,8 +24,8 @@ def make_720p():
     cap.set(4, 720)
 
 
-count_stranger = 100
-count_relative = 30
+count_stranger = 30
+count_relative = 40
 temp_id = 0
 flag = 0
 person_name = ""
@@ -45,7 +45,7 @@ while True:
         id_, conf = recognizer.predict(roi_gray)
         if conf >= 45 and conf <= 85:
             # print(id_)
-            print(labels[id_])
+            # print(labels[id_])
 
             # count_relative to recognize
             if temp_id != id_:
@@ -60,16 +60,11 @@ while True:
             color = (255, 255, 255)
             stroke = 2
             cv2.putText(frame, name, (x, y), font, 1, color, stroke, cv2.LINE_AA)
+            # cv2.putText(frame, "unknown", (x, y), font, 1, color, stroke, cv2.LINE_AA)
 
-            count_stranger = count_stranger - 1
-            if count_stranger == 0:
-                print("Who are you??")
-                count_stranger = 100
-                # flag = 2
-                break
             if count_relative == 0:
                 print("Successfully")
-                count_stranger = 100
+                # count_stranger = 100
                 count_relative = 30
                 # flag = 1
                 break
@@ -79,6 +74,13 @@ while True:
             color = (255, 255, 255)
             stroke = 2
             cv2.putText(frame, name, (x, y), font, 1, color, stroke, cv2.LINE_AA)
+            # print(name)
+            count_stranger = count_stranger - 1
+            if count_stranger == 0:
+                print("Who are you??")
+                count_stranger = 40
+                # flag = 2
+                break
         # # Draw a Rectangle
         color = (255, 0, 0)  # BGR 0 - 255
         stroke = 2

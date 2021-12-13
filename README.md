@@ -59,6 +59,7 @@ status: Người lạ/quen (True: quen/ fa
   - 1 quen, nhiều quen, 1 lạ, nhiều lạ, quen với lạa
 
 - [TASKS] => Nhận diện 1 mặt mà k phải người quen thì in ra unknown
+  https://gist.github.com/suadanwar/303fa9d7a028e2f6845aaddaa9ed7829?fbclid=IwAR3PSSGQ9BBDFooJJNxuVeGNjZPcgrgbMTqFQeUdOUOtczj-4uigxEL4wxY#file-face_lock-py
   => Quét nhiều mặt ...
   BUG: Algorithms quét 1 mặt là xác định 1 id không đổi trong 3s thì xuất ouput nhưng nhiều mặt thì dù quen hay lạ id nó cũng sẽ nhảy xen kẽ liên tục => ? Bắt như thế nào
 - [IDEA] Quét nhiều mặt 1 lúc
@@ -67,3 +68,7 @@ status: Người lạ/quen (True: quen/ fa
 
 - Status: True/False => Quen/Lạ
 - Response: Accept/Decline
+- Fix người lạ mở ảnh người quen bằng điện thoại
+  [REPORT]
+
+- Cúp điện thì hệ thống ntn ?
