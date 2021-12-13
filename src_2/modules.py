@@ -1,9 +1,9 @@
 from pymongo import MongoClient
-import os, glob
-from time import sleep
-import smtplib, ssl
 from email.mime.text import MIMEText
 from datetime import datetime
+import threading
+import os, glob
+import smtplib, ssl
 
 """
 Using Mongodb to store Data:
@@ -27,37 +27,6 @@ flag = db["flags"]
 
 
 class Mongo:
-    def queryFromDB(self):
-        if not os.path.exists("users.json") and not os.path.exists("history.json"):
-            open("persons.json", "a").close()
-            open("turns.json", "a").close()
-        from bson.json_util import dumps
-
-        UsersData = persons.find()
-        HistoryData = turns.find()
-        listUser = list(UsersData)
-        listHistory = list(HistoryData)
-        # Converting to the JSON
-        json_data = dumps(listUser, indent=2)
-        with open("persons.json", "w") as file:
-            file.write(json_data)
-        file.close()
-        json_data = dumps(listHistory, indent=2)
-        with open("turns.json", "w") as file:
-            file.write(json_data)
-        file.close()
-
-    # get response from DB
-    def receiveResponse(self):
-        response = False
-        for timeRemain in range(6):
-            """Query from DB to get response"""
-            response = flag.find_one({})["Response"]
-            if response:
-                return """Door open"""
-            sleep(1)
-        return """Door still lock"""
-
     def updateFlag(self):
         f = flag.find_one()
         newFlag = {"$set": {"Flagcheck": True}}
@@ -65,7 +34,11 @@ class Mongo:
 
     def clearTurn(self):
         turns.delete_many({})
-        return "delete all turns"
+        return "Delete all turns"
+
+    def clearPerson(self):
+        persons.delete_many({})
+        return "Delete all persons"
 
     def getNameById(self, id):
         Fname, Lname = "", ""
@@ -124,21 +97,18 @@ class Control:
 
 def sendMail(link, Fname="Undefined", Lname="Undefined"):
     port = 465
-
-    time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
     sender = "doorlock.bot@gmail.com"
     password = "datkll211"
 
     """Type your email"""
     recieve = "duyvu1109@gmail.com"
 
+    time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     submsg = """\
         <h2>{0} came home at {1} </h2>.
     """.format(
         Fname + Lname, time
     )
-
     msg = MIMEText(
         submsg
         + u"Someone is coming, <a href={0}>click here</a> for more infomation".format(
@@ -157,13 +127,29 @@ def sendMail(link, Fname="Undefined", Lname="Undefined"):
     print("sent email!")
 
 
-# Clear All Turn
-mg = Mongo()
-mg.clearTurn()
-
 # sendMail('https://localhost:3000', Fname = 'ndvu', Lname = '')
 
 ###########################################################################################################
-"""
-    Another modules
-"""
+timerCounter, response = 300, False
+
+
+def getResponse():
+    global timerCounter, response
+    response = flag.find_one({})["Response"]
+    if response == True:
+        print("Door opened")
+        timerCounter = 300
+        return
+    elif timerCounter < 0:
+        print("Door closed")
+        timerCounter = 300
+        return
+    else:
+        timerCounter -= 1
+    threading.Timer(1, getResponse).start()
+
+
+# Clear All Turn
+mg = Mongo()
+# mg.clearTurn()
+# mg.clearPerson()

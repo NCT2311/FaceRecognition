@@ -64,9 +64,9 @@ while True:
 
             if count_relative == 0:
                 print("Successfully")
-                # count_stranger = 100
+                count_stranger = 40
                 count_relative = 30
-                # flag = 1
+                flag = 1
                 break
         else:
             font = cv2.FONT_HERSHEY_SIMPLEX
@@ -79,7 +79,8 @@ while True:
             if count_stranger == 0:
                 print("Who are you??")
                 count_stranger = 40
-                # flag = 2
+                count_relative = 30
+                flag = 2
                 break
         # # Draw a Rectangle
         color = (255, 0, 0)  # BGR 0 - 255
@@ -108,20 +109,22 @@ while True:
         # sendMail("http://localhost:3000/home")
         # break
     if flag == 2:
-        # # Nguoi laa
         flag = 0
+        # Nguoi laa
+        Control.addPerson("", "undefined", "undefined", False)
+        id = persons.find().sort("_id", pymongo.DESCENDING).limit(1)[0]["_id"]
         img_item = (
             "../public/img/"
-            + person_name
+            + str(id)
             + str(datetime.now().strftime("%Y%m%d%H%M%S"))
             + ".png"
         )
         cv2.imwrite(img_item, frame)
         imgUrl = Control.getImageUrl("")
-        Mongo.updateFlag("")
-        Control.addPerson("", "undefined", "undefined", False)
-        id = persons.find().sort("_id", pymongo.DESCENDING).limit(1)[0]["_id"]
         Control.addTurn("", imgUrl, id, 0, False, False)
+        Mongo.updateFlag("")
+        getResponse()
+        # sendMail("http://localhost:3000/home")
         # break
     if cv2.waitKey(20) & 0xFF == ord("q"):
         break
