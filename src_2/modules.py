@@ -1,11 +1,9 @@
-from typing import Counter
 from pymongo import MongoClient
-import os, glob
-from time import sleep
-import smtplib, ssl
 from email.mime.text import MIMEText
 from datetime import datetime
 import threading
+import os, glob
+import smtplib, ssl
 '''
 Using Mongodb to store Data:
 My DB named "DoorLock" has two Collections:
@@ -106,8 +104,8 @@ def sendMail(link, Fname = 'Undefined', Lname = 'Undefined'):
 
 # sendMail('https://localhost:3000', Fname = 'ndvu', Lname = '')
 
-timerCounter, response = 300, False
 ###########################################################################################################
+timerCounter, response = 300, False
 def getResponse():
     global timerCounter, response
     response = flag.find_one({})['Response']
