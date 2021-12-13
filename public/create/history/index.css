@@ -8,3 +8,16 @@
     position: absolute;
     z-index: 3;
 }
+table 
+{
+
+    table-layout:fixed;
+    width:100%;
+   
+}
+.ten{
+    overflow: scroll;
+}
+td,th{
+    overflow: block;
+}

@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
     var firtname =  document.getElementById('firstname');
     var lastname =  document.getElementById('lastname');
@@ -15,7 +16,7 @@ $(document).ready(function () {
             if(!data.list.Status && data.flag.Flagcheck==true){
                 firtname.innerHTML = "Undefined";
                 lastname.innerHTML = "Undefined";
-                timeaccess.innerHTML =data.list.CreateAt;
+                timeaccess.innerHTML =moment(data.list.CreateAt).format("lll");
                 console.log(data.list.CreateAt);
             }
             else{
@@ -25,7 +26,7 @@ $(document).ready(function () {
                         //console.log(data2);
                         firtname.innerHTML = data2.person.Fname;
                         lastname.innerHTML = data2.person.Lname;
-                        timeaccess.innerHTML =data.list.CreateAt;
+                        timeaccess.innerHTML =moment(data.list.CreateAt).format("lll");
                     });
                 }
             }
