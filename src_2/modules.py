@@ -25,36 +25,6 @@ turns = db["turns"]
 flag = db["flags"]
 
 class Mongo:
-    def queryFromDB(self):
-        if not os.path.exists('users.json') and not os.path.exists('history.json'):
-            open('persons.json', 'a').close()
-            open('turns.json', 'a').close()
-        from bson.json_util import dumps
-        UsersData = persons.find()
-        HistoryData = turns.find()
-        listUser = list(UsersData)
-        listHistory = list(HistoryData)
-        # Converting to the JSON
-        json_data = dumps(listUser, indent = 2) 
-        with open('persons.json', 'w') as file:
-            file.write(json_data)
-        file.close()
-        json_data = dumps(listHistory, indent = 2) 
-        with open('turns.json', 'w') as file:
-            file.write(json_data)
-        file.close()
-
-    # get response from DB
-    def receiveResponse(self):
-        response = False
-        for timeRemain in range(300):
-            '''Query from DB to get response'''
-            response = flag.find_one({})['Response']
-            if (response):
-                return '''Door open'''
-            sleep(1)
-        return '''Door still lock'''
-
     def updateFlag(self):
         f = flag.find_one()
         newFlag = {"$set":{"Flagcheck": True}}
