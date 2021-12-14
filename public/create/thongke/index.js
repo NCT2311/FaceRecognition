@@ -1,16 +1,19 @@
 // Get context with jQuery - using jQuery's .get() method.
 var data = {
-    labels: ["10", "20", "40", "50", "70", "90"],
+    labels: ["10", "20","30", "40", "50","60", "70", "80", "90" , "100"],
     datasets: [{
       label: 'Exact ratio',
-      data: [10, 60, 80, 84,86, 88 ],
+      data: [78, 79, 80, 80,80, 81 , 82 ,83 ,85 ,87 ],
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
         'rgba(54, 162, 235, 0.2)',
         'rgba(255, 206, 86, 0.2)',
         'rgba(75, 192, 192, 0.2)',
         'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)'
+        'rgba(255, 159, 64, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
       ],
       borderColor: [
         'rgba(255,99,132,1)',
@@ -18,7 +21,10 @@ var data = {
         'rgba(255, 206, 86, 1)',
         'rgba(75, 192, 192, 1)',
         'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)'
+        'rgba(255, 159, 64, 1)',
+        'rgba(255,99,132,1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
       ],
       borderWidth: 1,
       fill: false
@@ -87,7 +93,7 @@ if ($("#barChart").length) {
     }
  
 var areaData = {
-    labels: [ "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5" , "Thứ 6","Thứ 7","Chủ nhật"],
+    labels: [ "Monday", "Tuesday", "Wednesday", "Thursday" , "Friday ","Saturday","Sunday"],
     datasets: [{
       label: 'Total arrivals',
       data: [mon,tue,wed,thu,fri,sat,sun],
