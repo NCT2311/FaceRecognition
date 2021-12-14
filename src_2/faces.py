@@ -93,6 +93,7 @@ while True:
     cv2.imshow("frame", frame)
     if flag == 1:
         flag = 0
+        # Nguoi quen
         # print(person_name)
         # Create last photo into folder
         img_item = (
@@ -122,9 +123,10 @@ while True:
         cv2.imwrite(img_item, frame)
         imgUrl = Control.getImageUrl("")
         Control.addTurn("", imgUrl, id, 0, False, False)
+        turnId = turns.find().sort("_id", pymongo.DESCENDING).limit(1)[0]["_id"]
         Mongo.updateFlag("")
-        getResponse()
-        # sendMail("http://localhost:3000/home")
+        getResponse(str(turnId))
+        sendMail()
         # break
     if cv2.waitKey(20) & 0xFF == ord("q"):
         break
