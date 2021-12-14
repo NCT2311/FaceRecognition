@@ -12,6 +12,7 @@ $('#tab-users').DataTable({
     language: {
         url: "//cdn.datatables.net/plug-ins/1.10.25/i18n/Vietnamese.json"
     } ,
+    "scrollY":        "550px",
     "columns": [
         { "width": "20%" },
         { "width": "20%" },

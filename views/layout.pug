@@ -23,51 +23,16 @@ head
   // partial:partials/_navbar.html
   nav.navbar.col-lg-12.col-12.p-0.fixed-top.d-flex.flex-row
     .text-center.navbar-brand-wrapper.d-flex.align-items-center.justify-content-center
-      a.navbar-brand.brand-logo.mr-5(href='home')
-        img.mr-2(src='images/logo.svg', alt='logo')
+      a.navbar-light.brand-logo.mr-5(href='home')
+        img(src='assets/img/logo1.png', alt='logo')
       a.navbar-brand.brand-logo-mini(href='home')
         img(src='images/logo-mini.svg', alt='logo')
     .navbar-menu-wrapper.d-flex.align-items-center.justify-content-end
       button.navbar-toggler.navbar-toggler.align-self-center(type='button', data-toggle='minimize')
         span.icon-menu
-      ul.navbar-nav.mr-lg-2
-        li.nav-item.nav-search.d-none.d-lg-block
-          .input-group
-            #navbar-search-icon.input-group-prepend.hover-cursor
-              span#search.input-group-text
-                i.icon-search
-            input#navbar-search-input.form-control(type='text', placeholder='Search now', aria-label='search', aria-describedby='search')
+
       ul.navbar-nav.navbar-nav-right
-        li.nav-item.dropdown
-          a#notificationDropdown.nav-link.count-indicator.dropdown-toggle(href='#', data-toggle='dropdown')
-            i.icon-bell.mx-0
-            span.count
-          .dropdown-menu.dropdown-menu-right.navbar-dropdown.preview-list(aria-labelledby='notificationDropdown')
-            p.mb-0.font-weight-normal.float-left.dropdown-header Notifications
-            a.dropdown-item.preview-item
-              .preview-thumbnail
-                .preview-icon.bg-success
-                  i.ti-info-alt.mx-0
-              .preview-item-content
-                h6.preview-subject.font-weight-normal Application Error
-                p.font-weight-light.small-text.mb-0.text-muted
-                  | Just now
-            a.dropdown-item.preview-item
-              .preview-thumbnail
-                .preview-icon.bg-warning
-                  i.ti-settings.mx-0
-              .preview-item-content
-                h6.preview-subject.font-weight-normal Settings
-                p.font-weight-light.small-text.mb-0.text-muted
-                  | Private message
-            a.dropdown-item.preview-item
-              .preview-thumbnail
-                .preview-icon.bg-info
-                  i.ti-user.mx-0
-              .preview-item-content
-                h6.preview-subject.font-weight-normal New user registration
-                p.font-weight-light.small-text.mb-0.text-muted
-                  | 2 days ago
+
         li.nav-item.nav-profile.dropdown
           a#profileDropdown.nav-link.dropdown-toggle(href='#', data-toggle='dropdown')
             img(src='images/faces/face28.jpg', alt='profile')
@@ -106,122 +71,7 @@ head
           .tiles.info
           .tiles.dark
           .tiles.default
-    #right-sidebar.settings-panel
-      i.settings-close.ti-close
-      ul#setting-panel.nav.nav-tabs.border-top(role='tablist')
-        li.nav-item
-          a#todo-tab.nav-link.active(data-toggle='tab', href='#todo-section', role='tab', aria-controls='todo-section', aria-expanded='true') TO DO LIST
-        li.nav-item
-          a#chats-tab.nav-link(data-toggle='tab', href='#chats-section', role='tab', aria-controls='chats-section') CHATS
-      #setting-content.tab-content
-        #todo-section.tab-pane.fade.show.active.scroll-wrapper(role='tabpanel', aria-labelledby='todo-section')
-          .add-items.d-flex.px-3.mb-0
-            form.form.w-100
-              .form-group.d-flex
-                input.form-control.todo-list-input(type='text', placeholder='Add To-do')
-                button#add-task.add.btn.btn-primary.todo-list-add-btn(type='submit') Add
-          .list-wrapper.px-3
-            ul.d-flex.flex-column-reverse.todo-list
-              li
-                .form-check
-                  label.form-check-label
-                    input.checkbox(type='checkbox')
-                    |                       Team review meeting at 3.00 PM
-                i.remove.ti-close
-              li
-                .form-check
-                  label.form-check-label
-                    input.checkbox(type='checkbox')
-                    |                       Prepare for presentation
-                i.remove.ti-close
-              li
-                .form-check
-                  label.form-check-label
-                    input.checkbox(type='checkbox')
-                    |                       Resolve all the low priority tickets due today
-                i.remove.ti-close
-              li.completed
-                .form-check
-                  label.form-check-label
-                    input.checkbox(type='checkbox', checked='')
-                    |                       Schedule meeting for next week
-                i.remove.ti-close
-              li.completed
-                .form-check
-                  label.form-check-label
-                    input.checkbox(type='checkbox', checked='')
-                    |                       Project review
-                i.remove.ti-close
-          h4.px-3.text-muted.mt-5.font-weight-light.mb-0 Events
-          .events.pt-4.px-3
-            .wrapper.d-flex.mb-2
-              i.ti-control-record.text-primary.mr-2
-              span Feb 11 2018
-            p.mb-0.font-weight-thin.text-gray Creating component page build a js
-            p.text-gray.mb-0 The total number of sessions
-          .events.pt-4.px-3
-            .wrapper.d-flex.mb-2
-              i.ti-control-record.text-primary.mr-2
-              span Feb 7 2018
-            p.mb-0.font-weight-thin.text-gray Meeting with Alisa
-            p.text-gray.mb-0 Call Sarah Graves
-        // To do section tab ends
-        #chats-section.tab-pane.fade(role='tabpanel', aria-labelledby='chats-section')
-          .d-flex.align-items-center.justify-content-between.border-bottom
-            p.settings-heading.border-top-0.mb-3.pl-3.pt-0.border-bottom-0.pb-0 Friends
-            small.settings-heading.border-top-0.mb-3.pt-0.border-bottom-0.pb-0.pr-3.font-weight-normal See All
-          ul.chat-list
-            li.list.active
-              .profile
-                img(src='images/faces/face1.jpg', alt='image')
-                span.online
-              .info
-                p Thomas Douglas
-                p Available
-              small.text-muted.my-auto 19 min
-            li.list
-              .profile
-                img(src='images/faces/face2.jpg', alt='image')
-                span.offline
-              .info
-                .wrapper.d-flex
-                  p Catherine
-                p Away
-              .badge.badge-success.badge-pill.my-auto.mx-2 4
-              small.text-muted.my-auto 23 min
-            li.list
-              .profile
-                img(src='images/faces/face3.jpg', alt='image')
-                span.online
-              .info
-                p Daniel Russell
-                p Available
-              small.text-muted.my-auto 14 min
-            li.list
-              .profile
-                img(src='images/faces/face4.jpg', alt='image')
-                span.offline
-              .info
-                p James Richardson
-                p Away
-              small.text-muted.my-auto 2 min
-            li.list
-              .profile
-                img(src='images/faces/face5.jpg', alt='image')
-                span.online
-              .info
-                p Madeline Kennedy
-                p Available
-              small.text-muted.my-auto 5 min
-            li.list
-              .profile
-                img(src='images/faces/face6.jpg', alt='image')
-                span.online
-              .info
-                p Sarah Graves
-                p Available
-              small.text-muted.my-auto 47 min
-        // chat tab ends
+    
     // partial
     // partial:partials/_sidebar.html
     nav#sidebar.sidebar.sidebar-offcanvas
@@ -241,7 +91,12 @@ head
             li.nav-item
                 a.nav-link(href='/alldata')
                     i.ti-search.menu-icon
-                    span.menu-title All history                   
+                    span.menu-title All history 
+            li.nav-item
+                a.nav-link(href='/thongke')
+                    i.icon-bar-graph.menu-icon
+                    span.menu-title Statistical
+                  
 
 
     .main-panel
@@ -250,14 +105,11 @@ head
       footer.footer
           .d-sm-flex.justify-content-center.justify-content-sm-between
               span.text-muted.text-center.text-sm-left.d-block.d-sm-inline-block
-                  | Copyright &copy; 2021.  Premium 
-                  a(href='https://www.bootstrapdash.com/', target='_blank') Bootstrap admin template
-                  |  from BootstrapDash. All rights reserved.
-              span.float-none.float-sm-right.d-block.mt-1.mt-sm-0.text-center
-                  | Hand-crafted &amp; made with 
-                  i.ti-heart.text-danger.ml-1
+                |  KHOA KHOA HỌC VÀ KỸ THUẬT MÁY TÍNH.
+                |  Designed and Developed by Nguyen Cong Thanh - Ha Duy Anh - Nguyen Duy Vu. 
+                |  Instructor: Tran Thanh Binh
 
-    
+
 
 
 

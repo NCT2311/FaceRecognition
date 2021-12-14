@@ -1,15 +1,16 @@
-import { Controller, Get, Post, Render, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Render, Req, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { TurnService } from 'src/turns/turn.service';
 import { PersonService } from './person.service';
 
 
-@Controller('home')
-export class PersonController {
+@Controller('thongke')
+export class ThongkeController {
   constructor(private readonly personService: PersonService , private readonly turnService: TurnService) {}
 
     @Get()
-    @Render('new')
+    @UseGuards(AuthGuard('jwt'))
+    @Render('thongke/index')
     async index() {
       var dataturn = await this.turnService.getTurns();
       var totalofturn = dataturn.length;
@@ -37,4 +38,12 @@ export class PersonController {
         totalquen:totalquen
       }
     }
+    @Post('/getall')
+    @UseGuards(AuthGuard('jwt'))
+    async getdata2(@Body('id') id: string) { 
+        var dataturn = await this.turnService.getTurns();
+      return {
+          list:dataturn
+    }
+}
 }

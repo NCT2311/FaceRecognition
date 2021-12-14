@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Post, Render, Req, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { TurnService } from 'src/turns/turn.service';
+import { Person } from './person.model';
 import { PersonService } from './person.service';
 
 
@@ -14,8 +15,14 @@ export class HistoryController {
     @Render('history/index')
     async index() {
         var list =  await this.personService.getPersons();
+        var data = new Array();
+        for (var i = 0 ; i < list.length ; i++){
+          if(list[i].Status == true){
+            data.push(list[i]);
+          }
+        }
         return {
-          list: list,
+          list: data,
     }
   }
   @Post('/getallTurn')

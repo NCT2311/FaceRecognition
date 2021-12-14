@@ -45,6 +45,19 @@ $(".btn-search").click(function (e) {
     });  
     $('#HistoryStudentModal').modal('show');
 })
+$('#tab-users').DataTable({
+    "responsive": true, "lengthChange": true, "autoWidth": true, "searching": true, "bPaginate": false, "dom": "lfrti",
+    language: {
+        url: "//cdn.datatables.net/plug-ins/1.10.25/i18n/Vietnamese.json"
+    } ,
+    "scrollY":        "550px",
+    "columns": [
+        { "width": "20%" },
+        { "width": "20%" },
+        { "width": "20%" },
+        { "width": "20%" },
+      ]
+    })
 
 
 
