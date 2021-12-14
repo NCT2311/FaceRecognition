@@ -78,7 +78,7 @@ def detect(name):
         for (x, y, w, h) in faces:
             roi_gray = gray[y : y + h, x : x + w]  # (y_coordinate_start, y_coordinate_end)
             id_, conf = recognizer.predict(roi_gray)
-            if conf >= 50:
+            if conf >= 45 and conf <= 85:
                 name = labels[id_]
                 if name != '':
                     return name
@@ -98,9 +98,9 @@ def iterativeDataSet(name):
             count += 1
     print("Accurate: {:.0f}%".format(100*count/len(os.listdir(folderPath))))
 
-training()
+# training()
 # print(detect('61aa3105223797e0e7ad043b'))
-iterativeDataSet('congthanh')
+# iterativeDataSet('61b858c8971873f8695d79c8')
 
 cap.release()
 cv2.destroyAllWindows()
@@ -111,13 +111,13 @@ def plot():
     import matplotlib.pyplot as plt
     import numpy as np
 
-    x = np.array([0,1,2,3])
-    y = np.array([5,3,2,4])
+    x = np.array([100,90,80,70,60,50,40,30,20,10])
+    y = np.array([80,80,80,80,80,80,80,80,79,78])
 
-    plt.plot(x, y)
+    plt.plot(x, y/100)
     plt.xlabel('Number of image use for training/person')
     plt.ylabel('Accurate')
     plt.show()
 
-# plot()
+plot()
 
