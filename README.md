@@ -65,7 +65,7 @@ status: Người lạ/quen (True: quen/ fa
 - [IDEA] Quét nhiều mặt 1 lúc
   => Xài 1 mảng lấy hết id ra, quét trong vòng 5-10s nếu count 1 tên trong người nhà = 100
   Trong turn
-
+  => Update 14/12: Sử dụng 2 count riêng, count người quen ít hơn count người lạ (unknown) => Đếm count rồi stop thôi
 - Status: True/False => Quen/Lạ
 - Response: Accept/Decline
 - Fix người lạ mở ảnh người quen bằng điện thoại
