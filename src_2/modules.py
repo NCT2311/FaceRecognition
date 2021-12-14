@@ -83,7 +83,7 @@ class Control:
     Email: doorlock.bot@gmail.com
     Password: datkll211
 '''
-def sendMail(link, Fname = 'Undefined', Lname = 'Undefined'):
+def sendMail():
     port = 465
     sender = 'doorlock.bot@gmail.com'
     password = 'datkll211'
@@ -92,10 +92,20 @@ def sendMail(link, Fname = 'Undefined', Lname = 'Undefined'):
     recieve = 'duyvu1109@gmail.com'
 
     time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    submsg = '''\
-        <h2>{0} came home at {1} </h2>.
-    '''.format(Fname + Lname, time)
-    msg = MIMEText(submsg + u'Someone is coming, <a href={0}>click here</a> for more infomation'.format(link),'html')
+
+    msg = MIMEText('''\
+    <pre>
+        Dear anh em 196,
+
+        Detect a stranger who wants to enter your home. 
+        Time: {0}.
+
+        <a href={1}>Click here</a> for more infomation.
+
+        Hometown.
+    </pre>. 
+
+    '''.format(time, 'https://localhost:3000'),'html')
 
     context = ssl.create_default_context()
 
@@ -105,8 +115,6 @@ def sendMail(link, Fname = 'Undefined', Lname = 'Undefined'):
         server.sendmail(sender, recieve, str(msg))
 
     print("sent email!")
-
-# sendMail('https://localhost:3000', Fname = 'ndvu', Lname = '')
 
 ###########################################################################################################
 timerCounter, response = 300, False

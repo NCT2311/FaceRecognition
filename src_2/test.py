@@ -6,7 +6,7 @@ import pickle
 
 def training():
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    image_dir = os.path.join(BASE_DIR, "images")
+    image_dir = os.path.join(BASE_DIR, "data")
 
     face_cascade = cv2.CascadeClassifier("./cascades/data/haarcascade_frontalface_alt2.xml")
     recognizer = cv2.face.LBPHFaceRecognizer_create()
@@ -67,7 +67,7 @@ def make_720p():
 make_720p()
 
 def detect(name):
-    directory = ".\\images\\{}".format(name)
+    directory = ".\\data\\{}".format(name)
     for filename in os.listdir(directory):
         frame = cv2.imread(os.path.join(directory, filename), cv2.IMREAD_COLOR)
         cv2.imshow("frame", frame)
@@ -78,7 +78,7 @@ def detect(name):
         for (x, y, w, h) in faces:
             roi_gray = gray[y : y + h, x : x + w]  # (y_coordinate_start, y_coordinate_end)
             id_, conf = recognizer.predict(roi_gray)
-            if conf >= 45:
+            if conf >= 50:
                 name = labels[id_]
                 if name != '':
                     return name
@@ -88,7 +88,7 @@ def detect(name):
 def iterativeDataSet(name):
     '''compare name with another'''
     count = 0
-    folderPath = ".\\images"
+    folderPath = ".\\data"
     for folderName in os.listdir(folderPath):
         personName = detect(folderName)
         print(personName)
@@ -115,7 +115,7 @@ def plot():
     y = np.array([5,3,2,4])
 
     plt.plot(x, y)
-    plt.xlabel('Number of images use for training/person')
+    plt.xlabel('Number of image use for training/person')
     plt.ylabel('Accurate')
     plt.show()
 

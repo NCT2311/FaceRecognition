@@ -105,7 +105,7 @@ while True:
         Fname, Lname = Mongo.getNameById("", person_name)
         imgUrl = Control.getImageUrl("")
         Control.addTurn("", imgUrl, person_name, 0, True, True)
-        # sendMail("http://localhost:3000/home")
+        sendMail()
         # break
     if flag == 2:
         flag = 0
@@ -124,7 +124,7 @@ while True:
         turnId = turns.find().sort("_id", pymongo.DESCENDING).limit(1)[0]["_id"]
         Mongo.updateFlag("")
         getResponse(str(turnId))
-        # sendMail("http://localhost:3000/home")
+        sendMail()
         # break
     if cv2.waitKey(20) & 0xFF == ord("q"):
         break
