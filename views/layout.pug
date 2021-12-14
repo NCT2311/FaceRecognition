@@ -72,63 +72,6 @@ head
           .tiles.dark
           .tiles.default
     
-        // To do section tab ends
-        #chats-section.tab-pane.fade(role='tabpanel', aria-labelledby='chats-section')
-          .d-flex.align-items-center.justify-content-between.border-bottom
-            p.settings-heading.border-top-0.mb-3.pl-3.pt-0.border-bottom-0.pb-0 Friends
-            small.settings-heading.border-top-0.mb-3.pt-0.border-bottom-0.pb-0.pr-3.font-weight-normal See All
-          ul.chat-list
-            li.list.active
-              .profile
-                img(src='images/faces/face1.jpg', alt='image')
-                span.online
-              .info
-                p Thomas Douglas
-                p Available
-              small.text-muted.my-auto 19 min
-            li.list
-              .profile
-                img(src='images/faces/face2.jpg', alt='image')
-                span.offline
-              .info
-                .wrapper.d-flex
-                  p Catherine
-                p Away
-              .badge.badge-success.badge-pill.my-auto.mx-2 4
-              small.text-muted.my-auto 23 min
-            li.list
-              .profile
-                img(src='images/faces/face3.jpg', alt='image')
-                span.online
-              .info
-                p Daniel Russell
-                p Available
-              small.text-muted.my-auto 14 min
-            li.list
-              .profile
-                img(src='images/faces/face4.jpg', alt='image')
-                span.offline
-              .info
-                p James Richardson
-                p Away
-              small.text-muted.my-auto 2 min
-            li.list
-              .profile
-                img(src='images/faces/face5.jpg', alt='image')
-                span.online
-              .info
-                p Madeline Kennedy
-                p Available
-              small.text-muted.my-auto 5 min
-            li.list
-              .profile
-                img(src='images/faces/face6.jpg', alt='image')
-                span.online
-              .info
-                p Sarah Graves
-                p Available
-              small.text-muted.my-auto 47 min
-        // chat tab ends
     // partial
     // partial:partials/_sidebar.html
     nav#sidebar.sidebar.sidebar-offcanvas
@@ -148,7 +91,12 @@ head
             li.nav-item
                 a.nav-link(href='/alldata')
                     i.ti-search.menu-icon
-                    span.menu-title All history                   
+                    span.menu-title All history 
+            li.nav-item
+                a.nav-link(href='/thongke')
+                    i.icon-bar-graph.menu-icon
+                    span.menu-title Statistical
+                  
 
 
     .main-panel

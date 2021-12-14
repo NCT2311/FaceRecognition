@@ -7,11 +7,12 @@ import { HistoryController } from "./history.controller";
 import { PersonController } from "./person.controller";
 import {Personschema} from "./person.model";
 import { PersonService } from "./person.service";
+import { ThongkeController } from "./thongke.controller";
 
  
 @Module({
     imports: [MongooseModule.forFeature([{name: 'Persons', schema: Personschema},{name: 'turns', schema: Turnschema}])],
-    controllers:[PersonController,HistoryController,AllhistoryController],
+    controllers:[PersonController,HistoryController,AllhistoryController,ThongkeController],
     providers: [PersonService, TurnService],
 })
 export class PersonModule{}
