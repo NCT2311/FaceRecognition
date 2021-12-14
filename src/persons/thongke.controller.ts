@@ -31,11 +31,15 @@ export class ThongkeController {
             }
          }
       }
+      var percentquen = Math.round(totalquen*100/totalofturn);
+      var percentla = Math.round(totalla*100/totalofturn);
       return{
         totalofturn:totalofturn,
         totalinday:totalinday,
         totalla:totalla,
-        totalquen:totalquen
+        totalquen:totalquen,
+        percentquen:percentquen,
+        percentla:percentla
       }
     }
     @Post('/getall')
