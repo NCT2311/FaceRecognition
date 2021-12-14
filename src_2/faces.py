@@ -107,7 +107,6 @@ while True:
         Fname, Lname = Mongo.getNameById("", person_name)
         imgUrl = Control.getImageUrl("")
         Control.addTurn("", imgUrl, person_name, 0, True, True)
-        # sendMail("http://localhost:3000/home")
         # break
     if flag == 2:
         flag = 0

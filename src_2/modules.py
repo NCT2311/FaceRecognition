@@ -148,14 +148,13 @@ def getResponse(turnId):
         newResponse = {"$set": {"Response": False}}
         flag.update_one(f, newResponse)
         for turn in turns.find():
-            print(turnId)
             if str(turn["_id"]) == turnId:
                 newResponse = {"$set": {"Response": True}}
                 turns.update_one(turn, newResponse)
                 turnId = ""
                 break
         return True
-    elif timerCounter < 0:
+    elif timerCounter < 0 or flag.find_one({})["Flagcheck"] == False:
         print("door closed")
         timerCounter = 300
         return False

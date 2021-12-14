@@ -36,15 +36,11 @@ def storeUserImage():
             if count_shot == 0:
                 cv2.imwrite("./images/" + newDataSet + "/" + str(count) + ".jpg", data)
                 count += 1
-                count_shot = 15
+                count_shot = 10
             count_shot = count_shot - 1
         cv2.waitKey(3)
         cv2.imshow("Face Detect", data)
         key = cv2.waitKey(1)
-
-        # if key == ord("k"):
-        #     cv2.imwrite("./images/" + newDataSet + "/" + str(count) + ".jpg", data)
-        #     count += 1
 
         # Press 'q' to exit
         if key == ord("q") or count == 30:
