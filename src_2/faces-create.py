@@ -27,7 +27,7 @@ def storeUserImage():
     )
     video = cv2.VideoCapture(0)
     count = 0
-    count_shot = 15
+    count_shot = 10
     while True:
         check, data = video.read()
         faces = face_cascade.detectMultiScale(data, scaleFactor=1.5, minNeighbors=5)
