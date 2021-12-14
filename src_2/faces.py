@@ -3,6 +3,7 @@ import cv2
 import pickle
 from modules import *
 import pymongo
+
 face_cascade = cv2.CascadeClassifier("./cascades/data/haarcascade_frontalface_alt2.xml")
 eye_cascade = cv2.CascadeClassifier("cascades/data/haarcascade_eye.xml")
 smile_cascade = cv2.CascadeClassifier("cascades/data/haarcascade_smile.xml")
@@ -23,12 +24,11 @@ def make_720p():
     cap.set(4, 720)
 
 
-count_stranger = 100
-count_relative = 50
+count_stranger = 30
+count_relative = 40
 temp_id = 0
 flag = 0
 person_name = ""
-
 make_720p()
 while True:
     # Capture frame-by-frame
@@ -42,35 +42,46 @@ while True:
         roi_color = frame[y : y + h, x : x + w]
         # Recognize: Deep learned model predict keras tensorflow pytorch scikit learn
         id_, conf = recognizer.predict(roi_gray)
-        if conf >= 45 and conf <= 85:
+        if conf >= 70 and conf <= 85:
             # print(id_)
-            print(labels[id_])
+            # print(labels[id_])
 
             # count_relative to recognize
             if temp_id != id_:
-                count_relative = 50
+                count_relative = 30
             temp_id = id_
             person_name = labels[id_]
             count_relative = count_relative - 1
 
-            # Write person's name
+            # # Write person's name
             font = cv2.FONT_HERSHEY_SIMPLEX
             name = labels[id_]
             color = (255, 255, 255)
             stroke = 2
             cv2.putText(frame, name, (x, y), font, 1, color, stroke, cv2.LINE_AA)
+            # cv2.putText(frame, "unknown", (x, y), font, 1, color, stroke, cv2.LINE_AA)
 
+            if count_relative == 0:
+                print("Successfully")
+                count_stranger = 40
+                count_relative = 30
+                flag = 1
+                break
+        else:
+            font = cv2.FONT_HERSHEY_SIMPLEX
+            name = "Unknown"
+            color = (255, 255, 255)
+            stroke = 2
+            cv2.putText(frame, name, (x, y), font, 1, color, stroke, cv2.LINE_AA)
+            # print(name)
             count_stranger = count_stranger - 1
             if count_stranger == 0:
                 print("Who are you??")
+                count_stranger = 40
+                count_relative = 30
                 flag = 2
                 break
-            if count_relative == 0:
-                print("Successfully")
-                flag = 1
-                break
-
-        # Draw a Rectangle
+        # # Draw a Rectangle
         color = (255, 0, 0)  # BGR 0 - 255
         stroke = 2
         end_cord_x = x + w  # Width of Rectangle
@@ -80,8 +91,8 @@ while True:
     # Display the resulting frame
     cv2.imshow("frame", frame)
     if flag == 1:
-        print("Successfully")
-        print(person_name)
+        flag = 0
+        # print(person_name)
         # Create last photo into folder
         img_item = (
             "../public/img/"
@@ -89,19 +100,16 @@ while True:
             + str(datetime.now().strftime("%Y%m%d%H%M%S"))
             + ".png"
         )
-        print(img_item)
         cv2.imwrite(img_item, frame)
         # # Insert turn of nguoi quen
         Fname, Lname = Mongo.getNameById("", person_name)
-        print(Fname, Lname)
-        Fname, Lname = Mongo.getNameById("", person_name)
         imgUrl = Control.getImageUrl("")
-        Control.addTurn("", imgUrl, person_name, 0, Status = True, Response = True)
-        Mongo.updateFlag("")
-        break
+        Control.addTurn("", imgUrl, person_name, 0, True, True)
+        # sendMail("http://localhost:3000/home")
+        # break
     if flag == 2:
+        flag = 0
         # Nguoi laa
-        print("Who are you??")
         Control.addPerson("", "undefined", "undefined", False)
         id = persons.find().sort("_id", pymongo.DESCENDING).limit(1)[0]["_id"]
         img_item = (
@@ -113,11 +121,14 @@ while True:
         cv2.imwrite(img_item, frame)
         imgUrl = Control.getImageUrl("")
         Control.addTurn("", imgUrl, id, 0, False, False)
+        turnId = turns.find().sort("_id", pymongo.DESCENDING).limit(1)[0]["_id"]
         Mongo.updateFlag("")
-        Mongo.receiveResponse("")
-        break
+        getResponse(str(turnId))
+        # sendMail("http://localhost:3000/home")
+        # break
     if cv2.waitKey(20) & 0xFF == ord("q"):
         break
+
 
 cap.release()
 cv2.destroyAllWindows()

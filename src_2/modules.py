@@ -31,6 +31,10 @@ class Mongo:
     def clearTurn(self):
         turns.delete_many({})
         return 'delete all turns'
+
+    def clearPerson(self):
+        persons.delete_many({})
+        return "Delete all persons"
     
     def getNameById(self, id):
         Fname, Lname = "",""
@@ -106,19 +110,27 @@ def sendMail(link, Fname = 'Undefined', Lname = 'Undefined'):
 
 ###########################################################################################################
 timerCounter, response = 300, False
-def getResponse():
+def getResponse(turnId):
     global timerCounter, response
     response = flag.find_one({})['Response']
     if (response == True):
         print("door opened")
         timerCounter = 300
-        return
+        f = flag.find_one()
+        newResponse = {"$set":{"Response": False}}
+        flag.update_one(f, newResponse)
+        for turn in turns.find():
+            print(turnId)
+            if str(turn['_id']) == turnId:
+                newResponse = {"$set":{"Response": True}}
+                turns.update_one(turn, newResponse)
+                turnId = ""
+                break
+        return True
     elif (timerCounter < 0):
         print("door closed")
         timerCounter = 300
-        return
+        return False
     else:
         timerCounter -= 1
-    threading.Timer(1, getResponse).start()
-
-
+    threading.Timer(1, getResponse, args=(turnId,)).start()
