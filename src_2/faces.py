@@ -124,7 +124,7 @@ while True:
         turnId = turns.find().sort("_id", pymongo.DESCENDING).limit(1)[0]["_id"]
         Mongo.updateFlag("")
         getResponse(str(turnId))
-        sendMail()
+        # sendMail()
         # break
     if cv2.waitKey(20) & 0xFF == ord("q"):
         break
