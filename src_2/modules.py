@@ -101,7 +101,7 @@ def sendMail():
     password = "datkll211"
 
     """Type your email"""
-    recieve = "duyvu1109@gmail.com"
+    recieve = "nguyencongthanh23111@gmail.com"
 
     time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
@@ -119,7 +119,7 @@ def sendMail():
     </pre>. 
 
     """.format(
-            time, "https://localhost:3000"
+            time, "http://localhost:3000/home"
         ),
         "html",
     )

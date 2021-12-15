@@ -44,9 +44,6 @@ while True:
         # Recognize: Deep learned model predict keras tensorflow pytorch scikit learn
         id_, conf = recognizer.predict(roi_gray)
         if conf >= 45 and conf <= 85:
-            # print(id_)
-            # print(labels[id_])
-
             # count_relative to recognize
             if temp_id != id_:
                 count_relative = 30
@@ -55,12 +52,11 @@ while True:
             count_relative = count_relative - 1
 
             # # Write person's name
-            font = cv2.FONT_HERSHEY_SIMPLEX
-            name = labels[id_]
-            color = (255, 255, 255)
-            stroke = 2
-            cv2.putText(frame, name, (x, y), font, 1, color, stroke, cv2.LINE_AA)
-            # cv2.putText(frame, "unknown", (x, y), font, 1, color, stroke, cv2.LINE_AA)
+            # font = cv2.FONT_HERSHEY_SIMPLEX
+            # name = labels[id_]
+            # color = (255, 255, 255)
+            # stroke = 2
+            # cv2.putText(frame, name, (x, y), font, 1, color, stroke, cv2.LINE_AA)
 
             if count_relative == 0:
                 print("Successfully")
@@ -69,12 +65,13 @@ while True:
                 flag = 1
                 break
         else:
-            font = cv2.FONT_HERSHEY_SIMPLEX
-            name = "Unknown"
-            color = (255, 255, 255)
-            stroke = 2
-            cv2.putText(frame, name, (x, y), font, 1, color, stroke, cv2.LINE_AA)
-            # print(name)
+            # Write person's name
+            # font = cv2.FONT_HERSHEY_SIMPLEX
+            # name = "Unknown"
+            # color = (255, 255, 255)
+            # stroke = 2
+            # cv2.putText(frame, name, (x, y), font, 1, color, stroke, cv2.LINE_AA)
+
             count_stranger = count_stranger - 1
             if count_stranger == 0:
                 print("Who are you??")
@@ -94,7 +91,6 @@ while True:
     if flag == 1:
         flag = 0
         # Nguoi quen
-        # print(person_name)
         # Create last photo into folder
         img_item = (
             "../public/img/"
