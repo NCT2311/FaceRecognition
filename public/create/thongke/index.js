@@ -31,6 +31,7 @@ var data = {
     }]
   };
   var options = {
+    responsive: true,
     scales: {
       yAxes: [{
         ticks: {

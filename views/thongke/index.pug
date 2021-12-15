@@ -50,13 +50,13 @@ block content
                             .card-body
                                 p.mb-4 Total acquaintances in and out during the day
                                 p.fs-30.mb-2=totalquen
-                                p=(totalquen/totalofturn)*100 + "% Percentage of total arrivals"
+                                p=percentquen + "% Percentage of total arrivals"
                     .col-md-6.stretch-card.transparent
                         .card.card-light-danger
                             .card-body
                                 p.mb-4 Total strangers in and out of the day
                                 p.fs-30.mb-2=totalla
-                                p=(totalla/totalofturn)*100 + "% Percentage of total arrivals"
+                                p=percentla + "% Percentage of total arrivals"
         .row 
             .col-md-6.mb-4.mb-lg-0.stretch-card.transparent
                 .card-body
@@ -66,7 +66,7 @@ block content
                         .chartjs-size-monitor-shrink
                         div
                     h4.card-title Statistics of accuracy according to the number of images to train
-                    canvas#barChart.chartjs-render-monitor(style='display: block; width: 510px; height: 255px;' width='1020' height='510')
+                    canvas#barChart.chartjs-render-monitor()
             .col-md-6.mb-4.mb-lg-0.stretch-card.transparent
                 .card-body
                     .chartjs-size-monitor
@@ -75,7 +75,7 @@ block content
                         .chartjs-size-monitor-shrink
                         div
                     h4.card-title Total arrivals on weekdays
-                    canvas#areaChart.chartjs-render-monitor(width='1020' height='510' style='display: block; width: 510px; height: 255px;')
+                    canvas#areaChart.chartjs-render-monitor()
 
 
 
@@ -91,8 +91,8 @@ block content
 
 
 
-//- block style 
-//-     link(rel="stylesheet", href="/create/turn/index.css")
+block style 
+    link(rel="stylesheet", href="/create/thongke/index.css")
 block script 
     script(src="/moment/moment.min.js")
     script(src="/create/thongke/index.js")
