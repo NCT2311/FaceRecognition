@@ -12,9 +12,9 @@ export class TurnService {
 
   constructor(
     @InjectModel('turns') private readonly turnModel: Model<Turn>,
-  ) {}
+  ) { }
 
-  async insertTurn( urlimg: string,Personid: string, Status: Boolean ,Response: Boolean ) {
+  async insertTurn(urlimg: string, Personid: string, Status: Boolean, Response: Boolean) {
     const newTurn = new this.turnModel({
       urlimg,
       Personid,
@@ -29,15 +29,15 @@ export class TurnService {
     turnId: string,
     urlimg: string,
     Status: Boolean,
-    Response : Boolean,
+    Response: Boolean,
   ) {
-    const update =await this.turnModel.findById(turnId);
+    const update = await this.turnModel.findById(turnId);
     update.Status = Status;
     update.urlimg = urlimg;
     update.Response = Response;
     update.save();
   }
-  async getSingTurn(turnId: string){
+  async getSingTurn(turnId: string) {
     const result = await this.turnModel.findById(turnId);
     return {
       id: result.id,
@@ -47,31 +47,31 @@ export class TurnService {
       Response: result.Response,
     }
   }
-    
-  async getbyPersonID(a: string){
+
+  async getbyPersonID(a: string) {
     const data = await this.turnModel.find();
-  //     relations: ["turns"],
-  //     where: {
-  //       turns: { Personid. : a },
-  //     }
-  // });
-    
+    //     relations: ["turns"],
+    //     where: {
+    //       turns: { Personid. : a },
+    //     }
+    // });
+
     // console.log(result[0].Personid.toString());
 
 
     //chiêu cuối
     //  const data =  await this.getTurns();
     let result = new Array();
-    for (var i = 0 ; i < data.length ; i++) {
-      if (data[i].Personid.toString() == a){
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].Personid.toString() == a) {
         result.push(data[i]);
       }
     }
     return result;
 
   }
-  async deleteTurn(turnId: string){
-    await this.turnModel.deleteOne({_id: turnId}).exec();
+  async deleteTurn(turnId: string) {
+    await this.turnModel.deleteOne({ _id: turnId }).exec();
   }
   async getTurns() {
     const turns = await this.turnModel.find().exec();
@@ -85,6 +85,4 @@ export class TurnService {
       CreateAt: prod.createAt,
     }));
   }
-  
-
 }

@@ -5,8 +5,6 @@ from modules import *
 import pymongo
 
 face_cascade = cv2.CascadeClassifier("./cascades/data/haarcascade_frontalface_alt2.xml")
-eye_cascade = cv2.CascadeClassifier("cascades/data/haarcascade_eye.xml")
-smile_cascade = cv2.CascadeClassifier("cascades/data/haarcascade_smile.xml")
 
 recognizer = cv2.face.LBPHFaceRecognizer_create()
 recognizer.read("trainner.yml")
@@ -24,8 +22,8 @@ def make_720p():
     cap.set(4, 720)
 
 
-count_stranger = 30
-count_relative = 40
+count_stranger = 40
+count_relative = 30
 temp_id = 0
 flag = 0
 person_name = ""
