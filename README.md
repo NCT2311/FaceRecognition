@@ -5,19 +5,20 @@
     - OpenCV version 4.5.3; Python version 3.9.7
 
 - Mongodb
-  pip install pymongo
-  pip install "pymongo[srv]"
+
+  - pip install pymongo
+  - pip install "pymongo[srv]"
 
 - Recognize
   - Training image into a numpy array
-    pip install pillow --upgrade
+    - pip install pillow --upgrade
 - Nestjs
-  npm i -g @nestjs/cli
+  - npm i -g @nestjs/cli
 
 [Run]
 
 - Sau khi cài đặt thành công opencv, python và các môi trường cần thiết (Run các lệnh trên ở terminal)
 - Ở folder chứa code (FaceRecognition)
-  Run lệnh: npm i
-  => Ta sẽ thấy xuất hiện folder node_modules
+  - Chạy ở terminal: npm i
+    => Ta sẽ thấy xuất hiện folder node_modules
 - Sau đó chạy chương trình theo hướng dẫn trong video demo
