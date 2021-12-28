@@ -18,7 +18,7 @@
 [Run]
 
 - Sau khi cài đặt thành công opencv, python và các môi trường cần thiết (Run các lệnh trên ở terminal)
-- Ở folder chứa code (FaceRecognition)
+- Ở folder chứa source code (nhánh main)
   - Chạy ở terminal: npm i
     => Ta sẽ thấy xuất hiện folder node_modules
 - Sau đó chạy chương trình theo hướng dẫn trong video demo
