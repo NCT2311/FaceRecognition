@@ -20,6 +20,7 @@ async function bootstrap() {
     })
   );
   app.setLocal("moment", moment);
-  await app.listen(3000);
+  app.enableCors();
+  await app.listen(process.env.PORT || 3000);
 }
 bootstrap();

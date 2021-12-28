@@ -1,6 +1,6 @@
 import { Controller, Get, Render,Post, Req ,Body, Res, UseGuards} from '@nestjs/common';
-import { User } from './User.model';
-import { UserService } from './User.service';
+import { User } from './user.model';
+import { UserService } from './user.service';
 import * as bcrypt from 'bcrypt';
 import { Request, Response } from 'express';
 import { AuthGuard } from '@nestjs/passport';

@@ -11,8 +11,8 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { JwtService } from '@nestjs/jwt';
-import { User } from 'src/user/User.model';
-import { UserService } from 'src/user/User.service';
+import { User } from 'src/user/user.model';
+import { UserService } from 'src/user/user.service';
 
 
 @Controller()

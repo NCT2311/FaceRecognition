@@ -15,8 +15,8 @@ import { AuthController } from './auth.controller';
 
 import { LocalStrategy } from './local.strategy';
 import { JwtStrategy } from './jwt.trategy';
-import { UserService } from 'src/user/User.service';
-import { userSchema } from 'src/user/User.model';
+import { UserService } from 'src/user/user.service';
+import { userSchema } from 'src/user/user.model';
 
 
 @Module({

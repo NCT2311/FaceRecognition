@@ -8,16 +8,16 @@
     position: absolute;
     z-index: 3;
 }
-table 
-{
 
-    table-layout:fixed;
-    width:100%;
-   
-}
-.ten{
-    overflow: scroll;
-}
-td,th{
-    overflow: block;
-}
+
+@media (max-width: 575.98px) {
+    .float-sm-right{
+        display: none;
+    }
+    h1{
+        font-size: 30px;
+    }
+    .btn-primary.custom-button{
+        margin-left:15px;
+    }
+ }
