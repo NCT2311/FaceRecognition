@@ -1,0 +1,92 @@
+
+@media (max-width: 1850.98px) { 
+    .row-content{
+        margin:40px 20px 20px 40px;
+    }
+    .h2-data{
+        margin:0px 0px 0px 30px;
+    }
+    .btn.btn-danger{
+        margin:0px 0px 0px 10px;
+    }
+    #id{
+        width: 670px;
+        height: 700px;
+    }
+    .row.row-content1{
+        margin:200px 20px 20px 100px;
+    }
+}
+@media (max-width: 1600px) {
+    .btn-primary{  font-size:20px;   }
+    .btn-primary{ font-size: 30px;}
+    .row.row-content1{
+        margin:100px 20px 20px 100px;
+    }
+ }
+ @media (max-width: 1419px) { 
+
+    .row-content1{
+        margin:60px 20px 20px 100px;
+    }
+    .cc{
+        font-size: 22px;;
+    }
+    #buttoncheck{
+        padding: 5px 10px 5px 10px;
+    }
+    #buttoncheck1{
+        padding: 5px 10px 5px 10px;
+    }
+ }
+ 
+@media (max-width: 1025px) { 
+    .row.row-content1{
+        margin:0px 0px 0px 0px;
+    }
+    .row-content{
+        display:none;
+    }
+    .buttoncheck{
+        position: relative;
+        left: 00px;
+        top:0px;
+    }
+    .css{
+        margin: auto;
+        padding: auto;
+        box-sizing: border-box;
+
+    }
+    #buttoncheck{
+        margin-left: 30px;
+        padding: 15px 10px 5px 10px;
+    }
+    #buttoncheck1{
+        padding: 15px 10px 5px 10px;
+    }
+ }
+
+
+@media (max-width: 575.98px) {
+    #buttoncheck{
+        margin-top: 30px;
+        margin-left: 30px;
+        padding: 15px 10px 5px 10px;
+    }
+    #buttoncheck1{
+        margin-top: 30px;
+        padding: 15px 10px 5px 10px;
+    }
+    h1 {
+        font-weight: bold;
+        font-size: 32px;
+      }
+      .float-sm-right{
+          display:none;
+      }
+ }
+
+
+
+

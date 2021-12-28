@@ -1,0 +1,81 @@
+head
+  meta(charset='UTF-8')
+  meta(http-equiv='X-UA-Compatible', content='IE=edge')
+  meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+  title &Dstrok;&#x1ED3; &aacute;n TKLL
+  link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm', crossorigin='anonymous')
+  // <script src="index.js" type="text/javascript" async></script>
+  link(rel='stylesheet', href='./js2/index.css')
+nav.navbar.navbar-expand-lg.navbar-dark.navbar-top
+  .container-fluid
+    a.navbar-brand(href='#')
+      img(src='./img/logo.png', alt='', style='width:45px;height: 45px;')
+    button.navbar-toggler(type='button', data-bs-toggle='collapse', data-bs-target='#main_nav', aria-expanded='false', aria-label='Toggle navigation')
+      span.navbar-toggler-icon
+    #main_nav.collapse.navbar-collapse
+      ul.navbar-nav
+        li.nav-item.active
+          a.nav-link(href='#') Home 
+        li.nav-item
+          a.nav-link(href='#')  About 
+
+    a.btn.btn-secondary.my-2.my-sm-0(type='button' href='login') Đăng nhập
+  // container-fluid.//
+div
+  .row
+    .col-md-4
+      .layout
+        .button1
+          .center
+            a(href='http://localhost:3000/admin')
+              button.btnn
+                svg.border(width='160px', height='60px', viewbox='0 0 160 60')
+                  polyline.bg-line(points='179,1 179,59 1,59 1,1 179,1')
+                  polyline.hl-line(points='179,1 179,59 1,59 1,1 179,1')
+                span CONFIRM STRANGER
+        .button2
+          .center1
+            a(href='http://localhost:3000/history')
+              button.btnn1
+                svg.border(width='145px', height='60px', viewbox='0 0 145 60')
+                  polyline.bg-line(points='179,1 179,59 1,59 1,1 179,1')
+                  polyline.hl-line(points='179,1 179,59 1,59 1,1 179,1')
+                span HISTORY
+      .container
+        .title
+          | SMART DOOR LOCKS
+        .title
+          | WITH FACIAL RECOGNITION
+    .col-md-8.layout1
+      video(width='100%', style='margin-top:30px;', controls='', autoplay='', muted='')
+        source(src='./img/itro.mp4', type='video/mp4')
+      .row
+        div(style='margin: auto;')
+          p.line-1.anim-typewriter(style='font-size: 30px; margin-top: 30px;') LOGIC DESIGN PROJECT
+          p.line-1.anim-typewriter Instructor: Tran Thanh Binh
+      // <div class="subtitle"> geek + smart + curious + nerd + ingenious + cunning = ME </div>
+  .row
+    .col-md-12
+      link(href='https://fonts.googleapis.com/css?family=Montserrat:400,700', rel='stylesheet')
+      section.hero-section
+        .card-grid
+          a.card(href='#')
+            .card__background(style='background-image: url(./img/card0.jpg)')
+            .card__content
+              p.card__category 1912562
+              h3.card__heading Ha Duy Anh
+          a.card(href='#')
+            .card__background(style='background-image: url(./img/card1.jpg)')
+            .card__content
+              p.card__category 1915144
+              h3.card__heading Nguyen Cong Thanh
+          a.card(href='#')
+            .card__background(style='background-image: url(./img/card2.jpg)')
+            .card__content
+              p.card__category 1915976
+              h3.card__heading Nguyen Duy Vu
+            div
+script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js', integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN', crossorigin='anonymous')
+script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q', crossorigin='anonymous')
+script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js', integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl', crossorigin='anonymous')
+script(src='./js2/index.js')

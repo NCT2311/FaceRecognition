@@ -1,0 +1,45 @@
+
+@media (max-width: 1850.98px) { 
+    #areaChart{display: block; width: 510px; height: 255px;}
+    #barChart{display: block; width: 510px; height: 255px; }
+}
+@media (max-width: 1600px) {
+
+ }
+ @media (max-width: 1419px) { 
+
+ }
+ 
+@media (max-width: 1025px) { 
+    
+ }
+
+
+@media (max-width: 575.98px) {
+    .col-md-6{
+        margin-left: 0px;
+        padding-left: 0px;
+    }
+    .card-body{
+        margin-left: 0px;
+        padding-left: 0px;
+        
+    }
+    #areaChart{
+        margin-left: 0px;
+        display: block; width: 350px; height: 200px;}
+        #barChart{    margin-left: 0px;
+            display: block; width: 350px; height: 200px;}
+    .breadcrumb {
+        display: none;
+    }
+
+    h1{
+        font-size: 40px;
+    }
+    .thongke{display: none;}
+ }
+
+
+
+

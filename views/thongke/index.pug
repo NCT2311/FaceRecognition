@@ -1,0 +1,98 @@
+extends ../layout.pug
+
+block content
+  .content-wrapper(style='padding-top:0px;')
+    // Content Header (Page header)
+    section.content-header
+      .container-fluid
+        .row.mb-2
+          .col-sm-6
+            h1 Statistical
+          .col-sm-6
+            ol.breadcrumb.float-sm-right
+              li.breadcrumb-item
+                a(href='http://localhost:3000/home') Home
+              li.breadcrumb-item.active Statistical
+      // /.container-fluid
+    // Main content
+    section.content
+      .container-fluid
+        .row.thongke        
+            .col-md-6.grid-margin.stretch-card
+                .card.tale-bg
+                    .card-people.mt-auto
+                    img(src='images/dashboard/people.svg' alt='people')
+                    .weather-info
+                        .d-flex
+                        div
+                            h2.mb-0.font-weight-normal
+                            i.icon-sun.mr-2
+                            | 31°C
+                        .ml-2
+                            h4.location.font-weight-normal TP Ho Chi Minh
+                            h6.font-weight-normal Viet Nam
+            .col-md-6.grid-margin.transparent
+                .row
+                    .col-md-6.mb-4.stretch-card.transparent
+                        .card.card-tale
+                            .card-body
+                                p.mb-4 Total number of arrivals
+                                p.fs-30.mb-2=totalofturn
+                    .col-md-6.mb-4.stretch-card.transparent
+                        .card.card-dark-blue
+                            .card-body
+                                p.mb-4 Total in and out of the day
+                                p.fs-30.mb-2=totalinday
+                                p=(totalinday/totalofturn)*100 + "% Percentage of total arrivals"
+                .row
+                    .col-md-6.mb-4.mb-lg-0.stretch-card.transparent 
+                        .card.card-light-blue
+                            .card-body
+                                p.mb-4 Total acquaintances in and out during the day
+                                p.fs-30.mb-2=totalquen
+                                p=percentquen + "% Percentage of total arrivals"
+                    .col-md-6.stretch-card.transparent
+                        .card.card-light-danger
+                            .card-body
+                                p.mb-4 Total strangers in and out of the day
+                                p.fs-30.mb-2=totalla
+                                p=percentla + "% Percentage of total arrivals"
+        .row 
+            .col-md-6.mb-4.mb-lg-0.stretch-card.transparent
+                .card-body
+                    .chartjs-size-monitor
+                        .chartjs-size-monitor-expand
+                        div
+                        .chartjs-size-monitor-shrink
+                        div
+                    h4.card-title Statistics of accuracy according to the number of images to train
+                    canvas#barChart.chartjs-render-monitor()
+            .col-md-6.mb-4.mb-lg-0.stretch-card.transparent
+                .card-body
+                    .chartjs-size-monitor
+                        .chartjs-size-monitor-expand
+                        div
+                        .chartjs-size-monitor-shrink
+                        div
+                    h4.card-title Total arrivals on weekdays
+                    canvas#areaChart.chartjs-render-monitor()
+
+
+
+
+
+                    
+
+
+
+
+
+
+
+
+
+block style 
+    link(rel="stylesheet", href="/create/thongke/index.css")
+block script 
+    script(src="/moment/moment.min.js")
+    script(src="/create/thongke/index.js")
