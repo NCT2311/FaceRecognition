@@ -164,6 +164,6 @@ def getResponse(turnId):
 
 
 # Clear All Turn
-mg = Mongo()
+# mg = Mongo()
 # mg.clearTurn()
 # mg.clearPerson()

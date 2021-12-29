@@ -22,8 +22,8 @@ def make_720p():
     cap.set(4, 720)
 
 
-count_stranger = 40
-count_relative = 30
+count_stranger = 50
+count_relative = 20
 temp_id = 0
 flag = 0
 person_name = ""
@@ -58,8 +58,8 @@ while True:
 
             if count_relative == 0:
                 print("Successfully")
-                count_stranger = 40
-                count_relative = 30
+                count_stranger = 50
+                count_relative = 20
                 flag = 1
                 break
         else:
@@ -73,8 +73,8 @@ while True:
             count_stranger = count_stranger - 1
             if count_stranger == 0:
                 print("Who are you??")
-                count_stranger = 40
-                count_relative = 30
+                count_stranger = 50
+                count_relative = 20
                 flag = 2
                 break
         # # Draw a Rectangle
